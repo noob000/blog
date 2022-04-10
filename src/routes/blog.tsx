@@ -100,9 +100,8 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                         to='/'
                         className={pathname === "/" ? 'selectedLi' : ''}>home</Link></li>
 
-                    <li><Link
-                        to='/blog'
-                        className={pathname.includes("article") ? 'selectedLi' : ''}>blog</Link></li>
+                    <li 
+                    className={pathname.includes("article") ? 'selectedLi' : ''}>article</li>
                     <li ><Link
                         to='/comment'
                         className={pathname.includes("comment") ? 'selectedLi' : ''}>comment</Link></li>

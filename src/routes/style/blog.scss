@@ -33,9 +33,7 @@
             font-size: 20px;
             color: var(--font-default);
 
-            .selectedLi {
-                color: #3578e5;
-            }
+            
 
             :hover {
                 color: #3578e5;
@@ -51,7 +49,9 @@
     .search_750px {
         display: none;
     }
-
+    .selectedLi {
+        color: #3578e5;
+    }
     .login_button {
         background-color: rgb(38, 144, 243);
         color: white;
