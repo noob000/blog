@@ -1,0 +1,14 @@
+@import "../../style/basic.scss";
+
+.themeButton {
+  height: 26px;
+  line-height: 20px;
+  padding: 3px 14px 3px 14px;
+  border-radius: 10px;
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--themeButton-hover);
+  }
+}

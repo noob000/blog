@@ -6,7 +6,10 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     devServer: {
         static: './dist',
-        hot: true
+        historyApiFallback: true,
+        hot: true,
+        port: 3999,
     },
-    stats:'errors-only'
+
+    stats: 'errors-only'
 });

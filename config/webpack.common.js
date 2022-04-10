@@ -15,9 +15,13 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, '../dist'),
         clean: true,
+        publicPath:"/"
     },
     resolve: {
-        extensions: ['.js', '.jsx', ".tsx", ".ts"]
+        extensions: ['.js', '.jsx', ".tsx", ".ts"],
+        alias:{
+            "@":path.resolve(__dirname, '../src'),
+        }
     },
     module: {
         rules: [
@@ -55,6 +59,10 @@ module.exports = {
                     'sass-loader',
                 ],
             },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+              },
         ],
     },
 };

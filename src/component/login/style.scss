@@ -1,0 +1,33 @@
+.loginContainer {
+    .titleContainer {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .formContainer {
+        margin: 0 auto;
+        width: 20rem;
+
+    }
+}
+
+.uploadContainer {
+    width:6rem;
+    height:6rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    .ant-upload-picture-card-wrapper {
+        width: auto;
+        border-radius:50%;
+
+        .ant-upload {
+            border-radius: 50%;
+            width:6rem;
+            height: 6rem;
+            padding:1px;
+        }
+    }
+}

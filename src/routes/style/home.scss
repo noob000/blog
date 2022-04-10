@@ -1,0 +1,44 @@
+@import "../../style/basic.scss";
+
+.main_wrapper {
+
+    .home_container {
+        max-width: 55rem;
+        display: flex;
+        flex-direction: row;
+        padding: 2rem;
+        margin: 0 auto;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-top: 1.5rem;
+    }
+
+
+
+}
+
+@media only screen and (max-width:850px) {
+    .main_wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        .home_container {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            .articlelist{
+                order:1;
+            }
+            .cardContainer{
+                width:100%;
+                order:0;
+                margin-bottom:1rem;
+            }
+        }
+
+
+    }
+
+}

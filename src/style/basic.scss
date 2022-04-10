@@ -1,0 +1,50 @@
+$br-color: #F5F5F5;
+$font-hover-color:#3578e5;
+$back-button-color:#4d4d4d;
+$font-grey-color:#606770;
+
+@media only screen and (min-width:1200px) {
+
+    html {
+        font-size: 20px;
+        scroll-behavior: smooth;
+        color: var(--font-default);
+        h1,h2,h3,h4,h5,li,p,span{
+            color: var(--font-default);
+        }
+    }
+}
+
+:root {
+    --bg-default: #F5F5F5;
+    --font-default: #242526;
+    --bg-articlelist: white;
+    --bg-article: rgb(241, 237, 237);
+    --font-button-hover: rgb(243, 243, 245);
+    --comment-color: rgb(167, 166, 165);
+    --comment-bg: white;
+    --bg-article1: rgb(241, 237, 237);
+    --themeButton-hover: rgb(233, 231, 231);
+    --reply-bg: #f4f5f5;
+    --replyed-content: #eaecf1;
+
+}
+
+:root[data-theme="dark"] {
+    --bg-default: #242526;
+    --font-default: rgb(224, 220, 220);
+    --bg-articlelist: #2f3133;
+    --bg-article: #2f3133;
+    --font-article: #F5F5F5;
+    --font-button-hover: rgb(78, 77, 76);
+    --comment-color: #d6d0d0;
+    --comment-bg: #2f3133;
+    --bg-article1: lavenderblush;
+    --themeButton-hover: rgb(99, 96, 96);
+    --reply-bg: rgb(119, 116, 116);
+    --replyed-content: rgb(68, 67, 67);
+}
+
+#root {
+    background-color: var(--bg-default);
+}

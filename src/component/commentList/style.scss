@@ -1,0 +1,69 @@
+@import "../../style/basic.scss";
+
+.commentList {
+    background-color: white;
+    width: 30rem;
+    margin: 0 auto;
+}
+
+.commentContainer {
+    width: 30rem;
+    padding: 1rem;
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid whitesmoke;
+    background-color: var(--comment-bg);
+    color: var(--comment-color);
+
+    .mainContainer {
+        padding-left: 1rem;
+
+        .bottomContainer {
+            padding-top: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+
+            .flex_container {
+               display: flex;
+               align-items: flex-start;
+               &:hover{
+                   cursor: pointer;
+               }
+                span {
+                    padding-right: 5px;
+                }
+            }
+
+
+        }
+    }
+}
+
+.replyList {
+    width: 25.5rem;
+
+    .replyContainer {
+        background-color: var(--reply-bg);
+        padding: 0.5rem 0.5rem 1rem 0.5rem;
+        display: flex;
+        border-bottom: 1px solid #eaecf1;
+
+        .contentContainer {
+            padding-bottom: 0.5rem;
+        }
+
+        .replyedContainer {
+            width: 21rem;
+            padding-left: 0.5rem;
+            background-color: var(--replyed-content);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+        }
+    }
+}
+
+.hoverPointer {
+    cursor: pointer;
+}

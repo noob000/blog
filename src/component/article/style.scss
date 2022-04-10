@@ -1,0 +1,38 @@
+@import "../../style/basic.scss";
+
+.article_outconatiner {
+    width: 85vw;
+    margin: 0 auto;
+    border-radius: 1rem;
+    display: flex;
+
+    .articleContainer {
+        background-color: var(--bg-article);
+        width: 60vw;
+        padding: 2rem 1rem 2rem 1rem;
+        border-radius: 0.8rem .8rem 0 0;
+        margin: 0;
+    }
+}
+
+.cataContainer {
+    position: sticky;
+    top: 0px;
+    padding: 0 10px 10px 10px;
+    margin-left: 40px;
+    padding-left: 10px;
+    background-color: var(--bg-article);
+    border-radius: 1rem;
+
+    .cataTitle {
+        font-weight: 500;
+        padding: 10px 0 0px 0;
+        text-align: center;
+        border-bottom: 1px solid black;
+        margin: 10px;
+    }
+
+    a {
+        color: rgb(47, 175, 145)
+    }
+}

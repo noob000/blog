@@ -1,0 +1,152 @@
+@import "../../style/basic.scss";
+
+
+.nav {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    padding: 0 5rem 0 5rem;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+
+
+
+    .logo {
+        line-height: 60px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--font-default);
+    }
+
+    ul {
+        padding: 0px;
+        margin-bottom: 0;
+
+        li {
+            display: inline-block;
+            line-height: 60px;
+            list-style: none;
+            width: auto;
+            margin: 0 20px 0 20px;
+            font-size: 20px;
+            color: var(--font-default);
+
+            .selectedLi {
+                color: #3578e5;
+            }
+
+            :hover {
+                color: #3578e5;
+            }
+
+            a {
+                text-decoration: none;
+                color: var(--font-default);
+            }
+        }
+    }
+
+    .search_750px {
+        display: none;
+    }
+
+    .login_button {
+        background-color: rgb(38, 144, 243);
+        color: white;
+        border: none;
+        border-radius: 0.3rem;
+        width: 3.5rem;
+        height: 1.7rem;
+        line-height: 1.7rem;
+        cursor: pointer;
+        transition: .5s;
+        padding: 0;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+}
+
+
+
+.button_container {
+    height: 60px;
+    line-height: 60px;
+
+    button {
+        background-color: $back-button-color;
+        width: 35px;
+    }
+}
+
+
+
+.sun {
+    right: 7px;
+}
+
+.moon {
+    right: 3px;
+}
+
+.toTop {
+    position: fixed;
+    text-align: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    font-size: 1.5rem;
+    right: 5rem;
+    top: 40rem;
+    cursor: pointer;
+    transition: .2s;
+    color: var(--font-default);
+
+    &:hover {
+        top: 39.5rem;
+        color: #3578e5;
+
+    }
+
+}
+
+.toTopDisplay {
+    display: none
+}
+
+.toggle_button {
+    display: none;
+    color: var(--font-default);
+}
+
+@media screen and (max-width: 1200px) {
+    .nav {
+        justify-content: space-between;
+        padding-left: 1rem;
+
+        .flex-bar {
+            width: 1px;
+            height: auto;
+        }
+
+        ul {
+            display: none;
+        }
+
+        .button_container {
+            display: none;
+        }
+
+        .login_container {
+            display: none;
+        }
+
+        .toggle_button {
+            display: inline;
+            cursor: pointer;
+
+        }
+    }
+}
