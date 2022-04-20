@@ -1,21 +1,76 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Prism from 'prismjs';
 import "./highlight.css"
 import './style.scss';
 // import Comment_area from '../class_trash/commentarea';
 
 import { observer } from "mobx-react-lite"
-export default observer((props: any) => {
+import { ArticleList } from '@/store/article';
+import dayjs from 'dayjs';
+import { articleLikeIcon, articleLikedIcon } from "@/icon"
+import { message } from 'antd';
+import api from '@/api/api';
+import useThrottle from '@/hook/useThrottle';
+interface ArticleProps {
+    id: number;
+    articleStore: ArticleList
+}
+
+export default observer((props: ArticleProps) => {
     const { id, articleStore } = props;
+    const [like, setLike] = useState<boolean>(false);
     const { getArticle } = articleStore;
+    const fn = (state: boolean) => {
+        let likeStr = localStorage.getItem("like");
+        if (state) {
+            let likeArr: any = likeStr.split(" ");
+            likeArr = likeArr.filter((element: string) => element !== String(id));
+            likeStr = likeArr.join(" ");
+            localStorage.setItem("like", likeStr);
+            api.updateArticleLike("minus", id).then(() => {
+                setLike(false);
+            })
+        }
+        else {
+            if (!likeStr) {
+                localStorage.setItem("like", String(id));
+                api.updateArticleLike("add", id).then(() => {
+                    setLike(true);
+                })
+
+            }
+            else {
+                let likeArr = likeStr.split(" ");
+                likeArr.push(String(id));
+                likeStr = likeArr.join(" ");
+                localStorage.setItem("like", likeStr);
+                api.updateArticleLike("add", id).then(() => {
+                    setLike(true);
+                })
+            }
+        }
+    }
+    const handleLike = useThrottle(fn);
     useLayoutEffect(() => {
         Prism.highlightAll()
     }, [])
-    const { article_content, catalogue } = getArticle(id);
+    const { article_content, catalogue, time } = getArticle(id);
+    useEffect(() => {
+        const likeStr = window.localStorage.getItem("like");
+        if (likeStr) {
+            const likeArr = likeStr.split(" ");
+            if (likeArr.includes(String(id))) setLike(true)
+        }
+    }, [])
+
     return (
         <div>
             <div className='article_outconatiner'>
-                <div className='articleContainer' dangerouslySetInnerHTML={{ __html: article_content }} />
+                <div>
+                    <div className='articleContainer' dangerouslySetInnerHTML={{ __html: article_content }} />
+                    <div>文章发布于：{dayjs(time).format("YYYY-MM-DD HH:MM")}</div>
+                    <div className="article-icon" onClick={() => handleLike(like)}>{like ? articleLikedIcon : articleLikeIcon}</div>
+                </div>
                 <div style={{ position: "relative" }}>
                     {catalogue && <div className="cataContainer">
                         <p className='cataTitle'>目录</p>
