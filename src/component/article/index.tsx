@@ -2,7 +2,6 @@ import React, { MutableRefObject, useEffect, useLayoutEffect, useRef, useState }
 import Prism from 'prismjs';
 import './style/style.scss';
 // import Comment_area from '../class_trash/commentarea';
-
 import { observer } from "mobx-react-lite"
 import { ArticleList } from '@/store/article';
 import dayjs from 'dayjs';
@@ -54,13 +53,8 @@ export default observer((props: ArticleProps) => {
     }
     const handleLike = useThrottle(fn);
     useLayoutEffect(() => {
-        if (theme === "dark") {
-            require("./style/light.css");
-        }
-        else require("./style/dark.css");
-        require("./prism");
         Prism.highlightAll()
-    })
+    }, [theme])
     const { article_content, catalogue, time } = getArticle(id);
     useEffect(() => {
         const likeStr = window.localStorage.getItem("like");
@@ -68,7 +62,6 @@ export default observer((props: ArticleProps) => {
             const likeArr = likeStr.split(" ");
             if (likeArr.includes(String(id))) setLike(true)
         }
-
     }, [])
 
     return (
