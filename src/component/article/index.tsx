@@ -1,7 +1,6 @@
 import React, { MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Prism from 'prismjs';
-import "./highlight.css"
-import './style.scss';
+import './style/style.scss';
 // import Comment_area from '../class_trash/commentarea';
 
 import { observer } from "mobx-react-lite"
@@ -11,14 +10,17 @@ import { articleLikeIcon, articleLikedIcon } from "@/icon"
 import { message } from 'antd';
 import api from '@/api/api';
 import useThrottle from '@/hook/useThrottle';
+import { Theme } from '@/store/theme';
 interface ArticleProps {
     id: number;
-    articleStore: ArticleList
+    articleStore: ArticleList,
+    themeStore: Theme;
 }
 
 export default observer((props: ArticleProps) => {
-    const { id, articleStore } = props;
+    const { id, articleStore, themeStore } = props;
     const [like, setLike] = useState<boolean>(false);
+    const { theme } = themeStore
     const { getArticle } = articleStore;
     const fn = (state: boolean) => {
         let likeStr = localStorage.getItem("like");
@@ -52,8 +54,13 @@ export default observer((props: ArticleProps) => {
     }
     const handleLike = useThrottle(fn);
     useLayoutEffect(() => {
+        if (theme === "dark") {
+            require("./style/light.css");
+        }
+        else require("./style/dark.css");
+        require("./prism");
         Prism.highlightAll()
-    }, [])
+    })
     const { article_content, catalogue, time } = getArticle(id);
     useEffect(() => {
         const likeStr = window.localStorage.getItem("like");
@@ -61,6 +68,7 @@ export default observer((props: ArticleProps) => {
             const likeArr = likeStr.split(" ");
             if (likeArr.includes(String(id))) setLike(true)
         }
+
     }, [])
 
     return (

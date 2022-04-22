@@ -1,16 +1,15 @@
+import { Theme } from "@/store/theme";
+import { observer } from "mobx-react-lite"
 import React from "react";
 import { useState, useEffect } from "react";
 import { moonIcon, sunIcon } from "../../icon"
 import './style.scss'
-export default function ThemeButton() {
-    const [theme, setTheme] = useState<string>('light');
+export default observer((props: { themeStore: Theme }) => {
+    const { themeStore } = props;
+    const { theme, setTheme } = themeStore;
     useEffect(() => {
         const html = document.querySelector('html');
-        const hour = new Date().getHours();
-        if (hour >= 20 || hour <= 4) {
-            setTheme('dark')
-            html?.setAttribute('data-theme', 'dark');
-        }
+        html?.setAttribute('data-theme', theme);
     }, [])
     const handleClick = () => {
         const html = document.querySelector('html');
@@ -25,7 +24,7 @@ export default function ThemeButton() {
     }
     return (
         <div>
-            {theme == 'light' ?
+            {theme === 'light' ?
                 <div className='themeButton' onClick={handleClick}>
                     {moonIcon}
                 </div>
@@ -35,4 +34,4 @@ export default function ThemeButton() {
                 </div>}
         </div>
     )
-}
+})

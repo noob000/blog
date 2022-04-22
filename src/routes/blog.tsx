@@ -19,6 +19,7 @@ import articleStore, { ArticleList } from "@/store/article";
 import request from "@/api/base";
 import { observer } from "mobx-react-lite";
 import api from "@/api/api";
+import ThemeStore from "@/store/theme";
 interface loginStateType {
     username: string | null,
     user_id: number | null,
@@ -36,7 +37,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
         let articleLink = [];
         for (let { id } of articleList.values()) {
             articleLink.push(
-                <Route path={`/article/${id}`} element={<Article id={id} articleStore={articleStore} key={id} />} />
+                <Route path={`/article/${id}`} element={<Article id={id} articleStore={articleStore} key={id} themeStore={ThemeStore} />} />
             )
         }
         return articleLink;
@@ -100,13 +101,13 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                         to='/'
                         className={pathname === "/" ? 'selectedLi' : ''}>home</Link></li>
 
-                    <li 
-                    className={pathname.includes("article") ? 'selectedLi' : ''}>article</li>
+                    <li
+                        className={pathname.includes("article") ? 'selectedLi' : ''}>article</li>
                     <li ><Link
                         to='/comment'
                         className={pathname.includes("comment") ? 'selectedLi' : ''}>comment</Link></li>
                 </ul>
-                <ThemeButton />
+                <ThemeButton themeStore={ThemeStore} />
                 <div className='login_container'>
                     {loginState === null
                         ? <Login
@@ -137,7 +138,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
             <div>
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    
+
                     <>
                         {articleList.size > 0 && prodArticleLink()}
                     </>
