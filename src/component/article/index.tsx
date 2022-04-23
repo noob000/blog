@@ -9,17 +9,17 @@ import { articleLikeIcon, articleLikedIcon } from "@/icon"
 import { message } from 'antd';
 import api from '@/api/api';
 import useThrottle from '@/hook/useThrottle';
-import { Theme } from '@/store/theme';
+
+
 interface ArticleProps {
     id: number;
     articleStore: ArticleList,
-    themeStore: Theme;
+ 
 }
 
 export default observer((props: ArticleProps) => {
-    const { id, articleStore, themeStore } = props;
+    const { id, articleStore} = props;
     const [like, setLike] = useState<boolean>(false);
-    const { theme } = themeStore
     const { getArticle } = articleStore;
     const fn = (state: boolean) => {
         let likeStr = localStorage.getItem("like");
@@ -53,8 +53,12 @@ export default observer((props: ArticleProps) => {
     }
     const handleLike = useThrottle(fn);
     useLayoutEffect(() => {
+        Prism.hooks.add("before-highlight", function (env) {
+            env.code = (env.element as any).innerText;
+        });
         Prism.highlightAll()
-    }, [theme])
+        // Prism.plugins.add
+    }, [])
     const { article_content, catalogue, time } = getArticle(id);
     useEffect(() => {
         const likeStr = window.localStorage.getItem("like");
@@ -63,7 +67,7 @@ export default observer((props: ArticleProps) => {
             if (likeArr.includes(String(id))) setLike(true)
         }
     }, [])
-
+    console.log(article_content)
     return (
         <div>
             <div className='article_outconatiner'>

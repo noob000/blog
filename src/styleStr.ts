@@ -211,7 +211,7 @@ pre[class*='language-'] {\
   font-family: Consolas,\ Monaco,\ 'Andale Mono',\ 'Ubuntu Mono',\ monospace;\
   font-size: 1em;\
   text-align: left;\
-  white-space: pre;\
+  white-space: pre-wrap;\
   word-spacing: normal;\
   word-break: normal;\
   word-wrap: normal;\
@@ -225,7 +225,7 @@ pre[class*='language-'] {\
   hyphens: none;\
 }\
 code[class*='language-'] {\
-  height: 50px;\
+  height:auto;\
   line-height: 50px;\
   display: block;\
   overflow-x: auto;\
@@ -398,5 +398,7 @@ div.code-toolbar > .toolbar > .toolbar-item > span:hover {\
   text-decoration: none;\
 }\
 "
+const darkStr1 = `\
 
-export { lightStr, darkStr }
+`
+export { lightStr, darkStr, darkStr1 }

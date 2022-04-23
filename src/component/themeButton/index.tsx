@@ -1,18 +1,21 @@
-import { Theme } from "@/store/theme";
 import { observer } from "mobx-react-lite"
 import React from "react";
 import { useState, useEffect } from "react";
 import { moonIcon, sunIcon } from "../../icon"
 import './style.scss'
-export default observer((props: { themeStore: Theme }) => {
-    const { themeStore } = props;
-    const { theme, setTheme } = themeStore;
+export default () => {
+    const [theme, setTheme] = useState<"dark" | "light">("light");
     useEffect(() => {
         const html = document.querySelector('html');
-        html?.setAttribute('data-theme', theme);
+        const hour = new Date().getHours();
+        if (hour > 20 || hour < 7)
+            html?.setAttribute('data-theme', "light");
+        else
+            html?.setAttribute('data-theme', "dark");
     }, [])
     const handleClick = () => {
         const html = document.querySelector('html');
+        const theme = html.getAttribute("data-theme")
         if (theme === 'dark') {
             setTheme('light');
             html?.setAttribute('data-theme', 'light');
@@ -34,4 +37,4 @@ export default observer((props: { themeStore: Theme }) => {
                 </div>}
         </div>
     )
-})
+}

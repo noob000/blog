@@ -12,8 +12,7 @@
     h4,
     h5,
     li,
-    p,
-    span {
+    p {
         color: var(--font-default);
     }
 
@@ -55,4 +54,39 @@
 
 .article-icon {
     cursor: pointer;
+}
+
+.hljs {
+    background-color: var(--codebg-color);
+    color: var(--codedefault-color);
+    border-radius: 5px;
+    padding: 15px;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+.keyword {
+    color: var(--keyword-color);
+}
+
+.class-name,
+.property,
+.literal-property {
+    color: var(--classname-color);
+}
+
+.function,
+.number {
+    color: var(--function-color);
+}
+
+.punctuation {
+    color: var(--punctuation-color);
+}
+
+.operartor {
+    color: var(--operator-color);
+}
+
+.string {
+    color: var(--string-color);
 }

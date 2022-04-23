@@ -19,7 +19,7 @@ import articleStore, { ArticleList } from "@/store/article";
 import request from "@/api/base";
 import { observer } from "mobx-react-lite";
 import api from "@/api/api";
-import ThemeStore from "@/store/theme";
+
 interface loginStateType {
     username: string | null,
     user_id: number | null,
@@ -37,7 +37,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
         let articleLink = [];
         for (let { id } of articleList.values()) {
             articleLink.push(
-                <Route path={`/article/${id}`} element={<Article id={id} articleStore={articleStore} key={id} themeStore={ThemeStore} />} />
+                <Route path={`/article/${id}`} element={<Article id={id} articleStore={articleStore} key={id} />} />
             )
         }
         return articleLink;
@@ -107,7 +107,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                         to='/comment'
                         className={pathname.includes("comment") ? 'selectedLi' : ''}>comment</Link></li>
                 </ul>
-                <ThemeButton themeStore={ThemeStore} />
+                <ThemeButton/>
                 <div className='login_container'>
                     {loginState === null
                         ? <Login

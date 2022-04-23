@@ -9,7 +9,7 @@ $font-grey-color:#606770;
         font-size: 20px;
         scroll-behavior: smooth;
         color: var(--font-default);
-      
+
     }
 }
 
@@ -25,7 +25,14 @@ $font-grey-color:#606770;
     --themeButton-hover: rgb(233, 231, 231);
     --reply-bg: #f4f5f5;
     --replyed-content: #eaecf1;
-
+    --keyword-color: #cc99cd;
+    --classname-color: #f8c555;
+    --function-color: #f08d49;
+    --punctuation-color: #ccc;
+    --operator-color: #67cdcc;
+    --string-color: #7ec699;
+    --codebg-color: #2d2d2d;
+    --codedefault-color:#ccc;
 }
 
 :root[data-theme="dark"] {
@@ -41,6 +48,15 @@ $font-grey-color:#606770;
     --themeButton-hover: rgb(99, 96, 96);
     --reply-bg: rgb(119, 116, 116);
     --replyed-content: rgb(68, 67, 67);
+    --keyword-color: #859900;
+    --classname-color: #268bd2;
+    --function-color: #268bd2;
+    --punctuation-color: #586e75;
+    --operator-color: #67cdcc;
+    --string-color: #2aa198;
+    --codebg-color: #fdf6e3;
+    --codedefault-color:#657b83;
+
 }
 
 #root {
