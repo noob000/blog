@@ -1,5 +1,4 @@
-import React from "react"
-import ReactDOM from "react-dom"
+
 import { action, makeAutoObservable, observable } from "mobx";
 import { ArticleItemProps } from "@/api/api";
 class ArticleList {

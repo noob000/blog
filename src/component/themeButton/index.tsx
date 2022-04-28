@@ -9,9 +9,9 @@ export default () => {
         const html = document.querySelector('html');
         const hour = new Date().getHours();
         if (hour > 20 || hour < 7)
-            html?.setAttribute('data-theme', "light");
-        else
             html?.setAttribute('data-theme', "dark");
+        else
+            html?.setAttribute('data-theme', "light");
     }, [])
     const handleClick = () => {
         const html = document.querySelector('html');

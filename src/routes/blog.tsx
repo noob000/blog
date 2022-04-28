@@ -19,17 +19,15 @@ import articleStore, { ArticleList } from "@/store/article";
 import request from "@/api/base";
 import { observer } from "mobx-react-lite";
 import api from "@/api/api";
-
+import LoginButton from "../component/login"
 interface loginStateType {
     username: string | null,
     user_id: number | null,
 }
 export default observer(({ articleStore }: { articleStore: ArticleList }) => {
-    const [loginState, setLoginState] = useState<loginStateType | null>(null);
     const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
     const [clientWidth, setClientWidth] = useState<number>(1000);
     const [bottomBarVisible, setBottomVisible] = useState<boolean>(false);
-    const [loginVisible, setLoginVisible] = useState<boolean>(false);
     const { articleList, inital } = articleStore;
     const { pathname } = useLocation();
 
@@ -37,7 +35,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
         let articleLink = [];
         for (let { id } of articleList.values()) {
             articleLink.push(
-                <Route path={`/article/${id}`} element={<Article id={id} articleStore={articleStore} key={id} />} />
+                <Route path={`/article/${id}`} element={<Article id={id} />} />
             )
         }
         return articleLink;
@@ -66,28 +64,11 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
     useEffect(() => {
         setDrawerVisible(clientWidth > 1200 ? false : drawerVisible)
     }, [clientWidth])
-    useEffect(() => {
-        const token = Cookies.get('token');
-        if (token) {
-            request.post(
-                'http://localhost:3666/lbt'
-            ).then((res) => {
-                if (res.data.info === 'success') {
-                    const { username, user_id } = res.data;
-                    setLoginState({
-                        username, user_id
-                    })
-                }
-            })
-        }
 
-    }, [])
     window.onresize = () => {
         setClientWidth(window.innerWidth);
     }
-    const handleLoginState = (user: any) => {
-        setLoginState(user)
-    }
+
 
     return (
         <div>
@@ -107,15 +88,9 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                         to='/comment'
                         className={pathname.includes("comment") ? 'selectedLi' : ''}>comment</Link></li>
                 </ul>
-                <ThemeButton/>
+                <ThemeButton />
                 <div className='login_container'>
-                    {loginState === null
-                        ? <Login
-                            loginVisible={loginVisible}
-                            setVisible={setLoginVisible}
-                            setLoginState={handleLoginState}
-                        />
-                        : <UserAnchor logout={() => setLoginState(null)} />}
+                    <LoginButton />
                 </div>
 
             </div>
@@ -142,7 +117,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                     <>
                         {articleList.size > 0 && prodArticleLink()}
                     </>
-                    <Route path='/comment' element={<Comment loginState={loginState} />} />
+                    {/* <Route path='/comment' element={<Comment loginState={loginState} />} /> */}
                 </Routes>
             </div>
             {/* <Bottombar /> */}

@@ -20,8 +20,8 @@
         background-color: var(--bg-article);
         width: 60vw;
         padding: 2rem 1rem 2rem 1rem;
-        border-radius: 0.8rem .8rem 0 0;
-        margin: 0;
+        border-radius: 0.8rem;
+        margin: 0 0 2rem 0;
 
         img {
             display: block;
@@ -32,7 +32,8 @@
 
 .cataContainer {
     position: sticky;
-    top: 0px;
+    min-width: 15rem;
+    top: 50px;
     padding: 0 10px 10px 10px;
     margin-left: 40px;
     padding-left: 10px;
@@ -48,12 +49,25 @@
     }
 
     a {
-        color: rgb(47, 175, 145)
+        color: rgb(47, 175, 145);
+        font-size: 0.9rem;
     }
 }
 
-.article-icon {
-    cursor: pointer;
+.detail {
+    display: flex;
+    align-items: center;
+    float: right;
+    color: var(--font-default);
+
+    .article-icon {
+        margin-left: 10px;
+        display: inline;
+        cursor: pointer;
+        border-color: var(--font-default);
+
+    }
+
 }
 
 .hljs {
