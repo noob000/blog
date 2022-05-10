@@ -5,8 +5,7 @@ import { observer } from "mobx-react-lite";
 import UserAnchor from "../userAnchor";
 import LoginButton from "./components/loginButton";
 const Index: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
-    const { loginState: { isLogin } } = loginStore
-    console.log(isLogin)
+    const { isLogin } = loginStore
     return (
         <>
             {isLogin ?

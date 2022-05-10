@@ -12,18 +12,18 @@ import useThrottle from '@/hook/useThrottle';
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import TextArea from 'antd/lib/input/TextArea';
 import loginStore, { Login } from '@/store/login';
+import CommentList from '../commentlist';
 interface ArticleProps {
     id: number;
     articleStore: ArticleList,
     loginStore: Login
 }
 
-const Index = observer((props: ArticleProps) => {
+const Article_Content = observer((props: ArticleProps) => {
     const { id, articleStore, loginStore } = props;
     const { getArticle } = articleStore;
-    const { loginState: { isLogin } } = loginStore;
+    const { isLogin } = loginStore;
     const [like, setLike] = useState<boolean>(false);
-    const [inputValue, setInputValue] = useState<string>("");
     const fn = (state: boolean) => {
         let likeStr = localStorage.getItem("like");
         if (state) {
@@ -56,12 +56,7 @@ const Index = observer((props: ArticleProps) => {
     }
     const handleLike = useThrottle(fn);
     const { article_content, catalogue, time } = getArticle(id);
-    const handleClick = () => {
-        if (isLogin) message.warn("请先登录");
-        else {
 
-        }
-    }
     useLayoutEffect(() => {
         Prism.highlightAll()
     }, [])
@@ -72,6 +67,7 @@ const Index = observer((props: ArticleProps) => {
             if (likeArr.includes(String(id))) setLike(true)
         }
     }, [])
+
     return (
         <div>
             <div className='article_outconatiner'>
@@ -83,12 +79,8 @@ const Index = observer((props: ArticleProps) => {
                             <div className="article-icon" onClick={() => handleLike(like)}>{like ? articleLikedIcon : articleLikeIcon}</div>
                         </div>
                     </div>
-                    <div>
-                        <div style={{ width: "25rem" }}>
-                            <TextArea rows={6} value={inputValue} onChange={(e) => { setInputValue(e.target.value) }} />
-                        </div>
-                        <Button onClick={handleClick}>{isLogin ? "发表评论" : "请先登录"}</Button>
-                    </div>
+
+                    <CommentList id={id} />
                 </div>
                 <div style={{ position: "relative" }}>
                     {catalogue && <div className="cataContainer">
@@ -105,6 +97,6 @@ const Index = observer((props: ArticleProps) => {
 })
 export default ({ id }: { id: number }) => {
     return (
-        <Index id={id} articleStore={articleStore} loginStore={loginStore} />
+        <Article_Content id={id} articleStore={articleStore} loginStore={loginStore} />
     )
 }

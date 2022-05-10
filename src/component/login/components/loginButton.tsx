@@ -6,11 +6,10 @@ import api from "@/api/api";
 import { observer } from "mobx-react-lite";
 import { Login } from "@/store/login";
 
-const LoginButton: FC<{ loginStore:Login}> = observer(({ loginStore }) => {
-    const { login } = loginStore
+const LoginButton: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
+    const { login, modalVisible, openModal, closeModal } = loginStore
     const [buttonState, setButtonState] = useState<"register" | "login">('login');
     const [loadingButton, setLoadingButton] = useState<boolean>(false);
-    const [visible, setVisible] = useState<boolean>(false)
     const handleLogin = ({ email, password }: { email: string, password: string }) => {
         api.login({ email, password })
             .then(({ statusCode, data }) => {
@@ -18,7 +17,7 @@ const LoginButton: FC<{ loginStore:Login}> = observer(({ loginStore }) => {
                 if (statusCode === 0 && message === "success") {
                     Message.success("登录成功");
                     login(id);
-                    setVisible(false)
+                    closeModal()
                 }
                 else if (statusCode === 0) Message.error(`${message}`);
                 else Message.error("服务器错误");
@@ -73,7 +72,7 @@ const LoginButton: FC<{ loginStore:Login}> = observer(({ loginStore }) => {
                             </Form.Item>
                             <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
                                 <Button type="primary" loading={loadingButton} htmlType="submit" >
-                                    Submit
+                                   登录
                                 </Button>
                             </Form.Item>
                         </Form>
@@ -148,16 +147,15 @@ const LoginButton: FC<{ loginStore:Login}> = observer(({ loginStore }) => {
             )
         }
     }
-
     return (
         <div>
-            <Button type="primary" onClick={() => setVisible(true)}>
+            <Button type="primary" onClick={openModal}>
                 登录
             </Button>
             <Modal
-                visible={visible}
+                visible={modalVisible}
                 title={buttonState === 'login' ? '登录' : "注册"}
-                onCancel={() => setVisible(false)}
+                onCancel={closeModal}
                 maskClosable={true}
                 closable={true}
                 footer={null}

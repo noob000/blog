@@ -1,31 +1,35 @@
 
 import { action, makeAutoObservable, observable } from "mobx";
 class Login {
-    @observable loginState: {
-        isLogin: boolean;
-        userId: number | null;
-    }
+    username: string | null = null;
+    @observable isLogin: boolean = false;
+    @observable userId: number | null = null;
+    @observable modalVisible: boolean = false;
+
     constructor() {
-        this.loginState = {
-            isLogin: false,
-            userId: null
-        }
         makeAutoObservable(this);
         this.login = this.login.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.logout = this.logout.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
     @action.bound
     login(id: number) {
-        this.loginState = {
-            isLogin: true,
-            userId: id
-        }
+        this.isLogin = true;
+        this.userId = id;
     }
     @action.bound
     logout() {
-        this.loginState = {
-            isLogin: false,
-            userId: null
-        }
+        this.isLogin = false;
+        this.userId = null;
+    }
+    @action.bound
+    openModal() {
+        this.modalVisible = true;
+    }
+    @action.bound
+    closeModal() {
+        this.modalVisible = false;
     }
 }
 const loginStore = new Login();
