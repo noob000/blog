@@ -2,8 +2,8 @@
 import { action, makeAutoObservable, observable } from "mobx";
 class Login {
     username: string | null = null;
+    userId: number | null = null;
     @observable isLogin: boolean = false;
-    @observable userId: number | null = null;
     @observable modalVisible: boolean = false;
 
     constructor() {
@@ -14,9 +14,10 @@ class Login {
         this.closeModal = this.closeModal.bind(this);
     }
     @action.bound
-    login(id: number) {
+    login(id: number, username: string) {
         this.isLogin = true;
         this.userId = id;
+        this.username = username;
     }
     @action.bound
     logout() {

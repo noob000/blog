@@ -21,7 +21,7 @@ export default function Lovecard() {
         return clearInterval(timer);
     }
     )
-    const content = year + '年' + day() + '天' + hour + '小时' + minute + '分钟' + seconds + '秒';
+    const content = year + '年' + day() + '天';
     return (
         <div className='card_love'>
             <div className='avatar_container'>

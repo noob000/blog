@@ -13,10 +13,10 @@ const LoginButton: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
     const handleLogin = ({ email, password }: { email: string, password: string }) => {
         api.login({ email, password })
             .then(({ statusCode, data }) => {
-                const { message, id } = data;
+                const { message, id,username } = data;
                 if (statusCode === 0 && message === "success") {
                     Message.success("登录成功");
-                    login(id);
+                    login(id,username);
                     closeModal()
                 }
                 else if (statusCode === 0) Message.error(`${message}`);
@@ -72,7 +72,7 @@ const LoginButton: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
                             </Form.Item>
                             <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
                                 <Button type="primary" loading={loadingButton} htmlType="submit" >
-                                   登录
+                                    登录
                                 </Button>
                             </Form.Item>
                         </Form>

@@ -79,7 +79,6 @@ const Article_Content = observer((props: ArticleProps) => {
                             <div className="article-icon" onClick={() => handleLike(like)}>{like ? articleLikedIcon : articleLikeIcon}</div>
                         </div>
                     </div>
-
                     <CommentList id={id} />
                 </div>
                 <div style={{ position: "relative" }}>

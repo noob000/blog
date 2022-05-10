@@ -33,7 +33,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, article_content, time, love,
                             </>
                         }
                     </div>
-                    <button className="read_button" onClick={updateView}><Link to={`/article/${id}`}>read</Link></button>
+                    <button className="read_button" onClick={updateView}><Link to={`/article/${id}`}>前往文章</Link></button>
                 </div>
             </div>
 
