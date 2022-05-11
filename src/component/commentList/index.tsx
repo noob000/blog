@@ -18,13 +18,14 @@ const CommentList = observer(({ id, loginStore }: CommentListProps) => {
     const [commentList, setCommentList] = useState<ArticleComment[]>([]);
     const [type, setType] = useState<"reply" | "comment">("comment");
     const [commentId, setCommentId] = useState<number>(-1);
-    const [replyTo, setReplyTo] = useState<ReplyTo | null>(null)
+    const [replyTo, setReplyTo] = useState<ReplyTo | null>(null);
+    const [refresh, setRefresh] = useState<number>(0)
     useEffect(() => {
         getArticleComment(id)
             .then((res) => {
                 setCommentList(res as any)
             })
-    }, [])
+    }, [refresh])
 
     return (
         <>
@@ -34,7 +35,8 @@ const CommentList = observer(({ id, loginStore }: CommentListProps) => {
                 replyTo,
                 setReplyTo: (obj: ReplyTo) => setReplyTo(obj),
                 commentId: -1,
-                setCommentId: (num: number) => setCommentId(num)
+                setCommentId: (num: number) => setCommentId(num),
+                setRefresh: () => setRefresh((prev) => prev + 1)
             }}>
                 <NewComment id={id} />
                 <div className='commentList'>

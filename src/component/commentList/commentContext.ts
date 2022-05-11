@@ -5,7 +5,8 @@ interface CommentContextProps {
     replyTo:ReplyTo | null;
     setReplyTo: (obj: ReplyTo) => void
     commentId: number;
-    setCommentId: (num: number) => void
+    setCommentId: (num: number) => void;
+    setRefresh:()=>void
 }
 interface ReplyTo {
     username: string;
@@ -17,7 +18,8 @@ const CommentContext = React.createContext<CommentContextProps>({
     replyTo: null,
     commentId: -1,
     setReplyTo: (obj: ReplyTo) => { },
-    setCommentId: (num: number) => { }
+    setCommentId: (num: number) => { },
+    setRefresh:()=>{}
 
 })
 export default CommentContext

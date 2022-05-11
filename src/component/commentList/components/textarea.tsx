@@ -9,7 +9,7 @@ import CommentContext, { ReplyTo } from "../commentContext";
 const Index: FC<{ loginStore: Login, id: number }> = observer(({ loginStore, id }) => {
     const { isLogin, userId, username, openModal } = loginStore;
     const [value, setValue] = useState<string>("");
-    const { replyTo, commentId, type, setType, setReplyTo, setCommentId } = useContext(CommentContext);
+    const { replyTo, commentId, type, setType, setReplyTo, setCommentId, setRefresh } = useContext(CommentContext);
     const handleClick = () => {
         if (!isLogin) openModal()
         else {
@@ -20,6 +20,7 @@ const Index: FC<{ loginStore: Login, id: number }> = observer(({ loginStore, id 
                             if (message === "success" && statusCode === 0) {
                                 Message.success("成功提交！");
                                 setValue("");
+                                setRefresh();
                             }
                             else Message.error(message);
                         })
@@ -30,6 +31,8 @@ const Index: FC<{ loginStore: Login, id: number }> = observer(({ loginStore, id 
                             if (message === "success" && statusCode === 0) {
                                 Message.success("成功提交！");
                                 setValue("");
+                                setRefresh();
+
                             }
                             else Message.error(message);
                         })
