@@ -1,10 +1,12 @@
 import { Avatar, Divider, message } from "antd"
-import moment from "moment"
+
 import React, { FC, useContext, useEffect, useRef, useState } from "react"
 import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
 import { replyItem } from "@/api/comment";
 import CommentContext from "../commentContext";
+import { fromNow } from "@/component/util";
+
 interface ReplyItemProps {
     commentId: number;
     username: string;
@@ -39,7 +41,7 @@ const ReplyItem: FC<ReplyItemProps> = ({ commentId, username, replyTo, time, con
                         <div className='title'>
                             <span>{username}</span>
                             <Divider type='vertical' />
-                            <span>{moment(time).fromNow()}</span>
+                            <span>{fromNow(time)}</span>
                         </div>
                         <div>{content}</div>
                         <div className='bottomContainer'>
@@ -60,7 +62,7 @@ const ReplyItem: FC<ReplyItemProps> = ({ commentId, username, replyTo, time, con
                         <div className='title'>
                             <span>{replyTo === null ? username : `${username} 回复 ${' '}${replyTo}`}</span>
                             <Divider type='vertical' />
-                            <span>{moment(time).fromNow()}</span>
+                            <span>{fromNow(time)}</span>
                         </div>
                         <div className='contentContainer'>
                             {content}

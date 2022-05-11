@@ -1,11 +1,11 @@
 import { Avatar, Divider, message } from "antd"
-import moment from "moment"
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
 import { replyItem, ArticleComment } from "@/api/comment";
 import ReplyItem from "./replyItem";
 import CommentContext from "../commentContext";
+import { fromNow } from "@/component/util";
 
 export default function CommentItem(props: ArticleComment) {
     const { username, time, content, love, replyList, id } = props;
@@ -37,7 +37,7 @@ export default function CommentItem(props: ArticleComment) {
                     <div className='title'>
                         <span>{username}</span>
                         <Divider type='vertical' />
-                        <span>{moment(time).fromNow()}</span>
+                        <span>{fromNow(time)}</span>
                     </div>
                     <div className='contentContainer'>
                         {content}
