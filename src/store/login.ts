@@ -2,7 +2,7 @@
 import { action, makeAutoObservable, observable } from "mobx";
 class Login {
     username: string | null = null;
-    userId: number | null = null;
+    @observable userId: number | null = null;
     @observable isLogin: boolean = false;
     @observable modalVisible: boolean = false;
 
