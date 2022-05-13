@@ -2,7 +2,7 @@
 import { useState } from "react";
 import './style/comment.scss';
 import { Input, Button, message } from 'antd';
-import classnames from 'classnames';
+import classname from 'classnames';
 import moment from "moment";
 import React from "react";
 import { useThrottle } from "@/component/util";
@@ -76,14 +76,14 @@ export default function Comment({ loginState }: CommentProps) {
 
     }
     return (
-        <div className='comment_wrapper'>
-            <div className='commentInput'>
-                <div className='flexContainer'>
+        <div styleName='comment_wrapper'>
+            <div styleName='commentInput'>
+                <div styleName='flexContainer'>
                     <button onClick={() => {
                         setReplyTo(null)
                         setPlaceholder('请在此输入您的评论')
                     }}
-                        className={classnames({
+                        styleName={classname({
                             cancelReply: true,
                             display: (replyTo === null)
                         })}
@@ -97,11 +97,11 @@ export default function Comment({ loginState }: CommentProps) {
                     <button onClick={addComment}>{buttValue()}</button>
                 </div>
             </div>
-            <CommentList
+            {/* <CommentList
                 url={'http://localhost:3666/getcommentlist'}
                 count={count}
                 addReply={addReply}
-                loginState={loginState} />
+                loginState={loginState} /> */}
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import './style.scss'
 const Index: FC<any> = () => {
     return (
-        <div className="intro_card">
+        <div styleName="intro_card">
             <h3>本站简介:</h3>
             <p>前端用到的技术栈:</p>
             <p>TypeScript+React+React-router+Webpack+Mobx+Antd(未来可能会剔除更换为自己的组件库)</p>

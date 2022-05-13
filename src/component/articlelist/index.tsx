@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import './style.scss';
-import '@/style/basic.scss';
 import ArticleItem from "./articleItem";
 import api, { ArticleItemProps } from "@/api/api";
 import { observer } from "mobx-react-lite";
@@ -16,7 +15,7 @@ export default observer((props: any) => {
         return result;
     }
     return (
-        <div className='articlelist'>
+        <div styleName='articlelist'>
             {articleList.size > 0 && articlelist()}
         </div>
     )

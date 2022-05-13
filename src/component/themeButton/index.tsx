@@ -28,11 +28,11 @@ export default () => {
     return (
         <div>
             {theme === 'light' ?
-                <div className='themeButton' onClick={handleClick}>
+                <div styleName='themeButton' onClick={handleClick}>
                     {moonIcon}
                 </div>
 
-                : <div className='themeButton' onClick={handleClick}>
+                : <div styleName='themeButton' onClick={handleClick}>
                     {sunIcon}
                 </div>}
         </div>

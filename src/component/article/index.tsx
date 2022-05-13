@@ -15,7 +15,7 @@ import loginStore, { Login } from '@/store/login';
 import CommentList from '../commentlist';
 interface ArticleProps {
     id: number;
-    articleStore: ArticleList,
+    articleStore:  ArticleList,
     loginStore: Login
 }
 
@@ -70,20 +70,20 @@ const Article_Content = observer((props: ArticleProps) => {
 
     return (
         <div>
-            <div className='article_outconatiner'>
+            <div styleName='article_outconatiner'>
                 <div>
-                    <div className='articleContainer'>
+                    <div styleName='articleContainer'>
                         <div dangerouslySetInnerHTML={{ __html: article_content }} />
-                        <div className='detail'>
+                        <div styleName='detail'>
                             <span>文章发布于：{dayjs(time).format("YYYY-MM-DD HH:MM")}</span>
-                            <div className="article-icon" onClick={() => handleLike(like)}>{like ? articleLikedIcon : articleLikeIcon}</div>
+                            <div styleName="article-icon" onClick={() => handleLike(like)}>{like ? articleLikedIcon : articleLikeIcon}</div>
                         </div>
                     </div>
                     <CommentList id={id} />
                 </div>
                 <div style={{ position: "relative" }}>
-                    {catalogue && <div className="cataContainer">
-                        <p className='cataTitle'>目录</p>
+                    {catalogue && <div styleName="cataContainer">
+                        <p styleName='cataTitle'>目录</p>
                         <div
                             style={{ paddingLeft: "10px" }}
                             dangerouslySetInnerHTML={{ __html: catalogue }} />

@@ -1,20 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import './style.scss';
 import CommentItem from './components/commentItem';
-// import { loginStateType } from '../page/blog';
-import request from "@/api/base";
 import { addArticleComment, addArticleReply, ArticleComment, getArticleComment } from "@/api/comment";
-import TextArea from "antd/lib/input/TextArea";
-import { Button, message as Message } from "antd";
 import { observer } from "mobx-react-lite";
-import loginStore, { Login } from "@/store/login";
-import NewComment from "./components/textarea";
+import NewComment from "./components/textarea/textarea";
 import CommentContext, { ReplyTo } from "./commentContext";
 interface CommentListProps {
     id: number;
-    loginStore: Login
 }
-const CommentList = observer(({ id, loginStore }: CommentListProps) => {
+const CommentList = observer(({ id }: CommentListProps) => {
     const [commentList, setCommentList] = useState<ArticleComment[]>([]);
     const [type, setType] = useState<"reply" | "comment">("comment");
     const [commentId, setCommentId] = useState<number>(-1);
@@ -28,22 +22,23 @@ const CommentList = observer(({ id, loginStore }: CommentListProps) => {
     }, [refresh])
 
     return (
-        <>
+        <div styleName="commentOutContainer">
             <CommentContext.Provider value={{
                 type,
                 setType: (type: "reply" | "comment") => setType(type),
                 replyTo,
                 setReplyTo: (obj: ReplyTo) => setReplyTo(obj),
-                commentId: -1,
+                commentId: commentId,
                 setCommentId: (num: number) => setCommentId(num),
                 setRefresh: () => setRefresh((prev) => prev + 1)
             }}>
                 <NewComment id={id} />
-                <div className='commentList'>
+                <div styleName='commentList'>
+                    <h2>全部评论</h2>
                     {prodList(commentList)}
                 </div>
             </CommentContext.Provider>
-        </>
+        </div>
     )
 })
 const prodList = (commentList: ArticleComment[]) => commentList.length > 0 ?
@@ -53,4 +48,4 @@ const prodList = (commentList: ArticleComment[]) => commentList.length > 0 ?
     />
     )
     : []
-export default ({ id }: { id: number }) => <CommentList loginStore={loginStore} id={id} />
+export default CommentList;

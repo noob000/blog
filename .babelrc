@@ -1,12 +1,38 @@
 {
-    "presets": [
-      "@babel/env",
-      "@babel/react"
+  "presets": [["@babel/env"], "@babel/react","@babel/typescript"],
+
+  // Babel >= 7.13.0 (https://babeljs.io/docs/en/assumptions)
+  "plugins": [
+    [
+      "react-css-modules",
+      {
+        "generateScopedName": "[path]_[local]",
+        "filetypes": {
+          ".scss": { "syntax": "postcss-scss" }
+        },
+        "exclude": "node_modules",
+        "webpackHotModuleReloading": true,
+        "attributeNames": {
+          "activeStyleName": "activeClassName"
+        },
+        "autoResolveMultipleImports":true
+      }
     ],
-    
-    // Babel >= 7.13.0 (https://babeljs.io/docs/en/assumptions)
-    "plugins": [["@babel/plugin-proposal-class-properties"]],
-    "assumptions": {
-        "setPublicClassFields": false
-    }
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "@": "./src"
+        }
+      }
+    ],
+
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": false }],
+    ["react-hot-loader/babel"]
+  ],
+  "assumptions": {
+    "setPublicClassFields": false
   }
+}

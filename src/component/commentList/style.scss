@@ -1,9 +1,12 @@
 @import "../../style/basic.scss";
 
 .commentList {
-    background-color: var(--bg-article);
     margin: 0 auto;
 
+    &>div:last-of-type {
+        border-bottom: none;
+
+    }
 }
 
 .commentContainer {
@@ -11,15 +14,32 @@
     padding: 1rem;
     display: flex;
     align-items: flex-start;
-    border-bottom: 1px solid whitesmoke;
+    border-bottom: 0.5px solid var(--comment-border-color);
     background-color: var(--comment-bg);
     color: var(--comment-color);
+
+    &:hover {
+        .mainContainer {
+            .title {
+                .delete {
+                    display: block;
+                }
+            }
+        }
+    }
 
     .mainContainer {
         padding-left: 1rem;
 
         .title {
             margin-bottom: 0.5rem;
+
+            .delete {
+                float: right;
+                color: red;
+                cursor: pointer;
+                display: none;
+            }
         }
 
         .bottomContainer {
@@ -47,12 +67,12 @@
 
 .replyList {
     width: 50vw;
+    border-radius: 10px;
+    background-color: var(--reply-bg);
 
     .replyContainer {
-        background-color: var(--reply-bg);
         padding: 0.5rem;
         display: flex;
-        border-bottom: 1px solid #eaecf1;
         width: 100%;
 
         .contentContainer {
@@ -60,7 +80,7 @@
         }
 
         .replyedContainer {
-            width:40vw;
+            width: 40vw;
             padding-left: 0.5rem;
             background-color: var(--replyed-content);
             overflow: hidden;
@@ -77,3 +97,16 @@
 .hoverPointer {
     cursor: pointer;
 }
+
+#inputArea {
+    background-color: var(--inputArea--bg-color);
+    color: var(--inputArea--color);
+}
+
+.commentOutContainer {
+    border-radius: 0.8rem;
+    background-color: var(--comment-bg);
+    padding: 2rem 1rem 2rem 1rem;
+    margin-bottom: 1rem;
+}
+.avatarContainer{}

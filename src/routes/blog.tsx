@@ -72,30 +72,30 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
 
     return (
         <div>
-            <div className='nav' id='navigation' >
-                <span className='toggle_button'
+            <div styleName='nav' id='navigation' >
+                <span styleName='toggle_button'
                     onClick={() => setDrawerVisible(!drawerVisible)}><AlignLeftOutlined style={{ fontSize: '1.5rem' }} /></span>
-                <span className='logo'>no_OBlog</span>
-                <div className='flex-bar'></div>
+                <span styleName='logo'>no_OBlog</span>
+                <div styleName='flex-bar'></div>
                 <ul>
                     <li ><Link
                         to='/'
-                        className={pathname === "/" ? 'selectedLi' : ''}>home</Link></li>
+                        styleName={pathname === "/" ? 'selectedLi' : ''}>home</Link></li>
 
                     <li
-                        className={pathname.includes("article") ? 'selectedLi' : ''}>article</li>
+                        styleName={pathname.includes("article") ? 'selectedLi' : ''}>article</li>
                     <li ><Link
                         to='/comment'
-                        className={pathname.includes("comment") ? 'selectedLi' : ''}>comment</Link></li>
+                        styleName={pathname.includes("comment") ? 'selectedLi' : ''}>comment</Link></li>
                 </ul>
                 <ThemeButton />
-                <div className='login_container'>
+                <div styleName='login_container'>
                     <LoginButton />
                 </div>
 
             </div>
 
-            <div className={classnames({
+            <div styleName={classnames({
                 toTop: true,
                 toTopDisplay: bottomBarVisible
             })}

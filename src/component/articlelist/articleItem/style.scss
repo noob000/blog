@@ -1,0 +1,65 @@
+@import "../../../style/basic.scss";
+.infor_number {
+    padding: 0px 0px 0px 0.3rem;
+}
+
+.read_button {
+    position: relative;
+    background-color: var(--bg-articlelist);
+    outline: none;
+    border: none;
+    color: chocolate;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    font-size: 0.8rem;
+    transition: .3s;
+}
+
+@media only screen and (max-width:620px) {
+    .read_button {
+        display: none;
+    }
+}
+.articleItem {
+    width: auto;
+    height: auto;
+    margin: 0 0 1rem 0;
+    border-radius: 1rem;
+    padding-bottom: 0.51rem;
+    border-radius: 1rem;
+    background-color: var(--bg-articlelist);
+    color: var(--font-default);
+    &:hover {
+        box-shadow: 5px #D3D3D3
+    }
+
+    .infor_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        height: 10rem;
+        width: 100%;
+        font-size: 0.8rem;
+        .bottom_container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-size: 0.8rem;
+            justify-content: space-between;
+
+            .iconContainer {
+                display: flex;
+                align-items: center;
+
+                overflow: hidden;
+            }
+        }
+    }
+}
+.article_content{
+    
+}

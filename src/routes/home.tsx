@@ -10,11 +10,11 @@ export default function Home() {
         setWidth(window.innerWidth);
     }
     return (
-        <div className='main_wrapper'>
-            <div className='home_container'>
+        <div styleName='main_wrapper'>
+            <div styleName='home_container'>
 
                 <Articlelist width={width} articleStore={articleStore} />
-                <div className='cardContainer'>
+                <div styleName='cardContainer'>
                     <Lovecard />
                     <IntroCard/>
                 </div>

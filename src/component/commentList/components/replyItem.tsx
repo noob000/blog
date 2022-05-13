@@ -6,7 +6,10 @@ import { UserOutlined } from '@ant-design/icons';
 import { replyItem } from "@/api/comment";
 import CommentContext from "../commentContext";
 import { fromNow } from "@/component/util";
-
+import { observer } from "mobx-react-lite";
+import loginStore, { Login } from "@/store/login";
+import UserContext from "@/component/userContext/userIdHoc";
+import "../style.scss"
 interface ReplyItemProps {
     commentId: number;
     username: string;
@@ -16,9 +19,23 @@ interface ReplyItemProps {
     replyContent: string;
     replyId: number;
     replyTo: string;
+    user_id:number
 }
-const ReplyItem: FC<ReplyItemProps> = ({ commentId, username, replyTo, time, content, love, replyContent, replyId }) => {
+
+const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
+    commentId,
+    user_id,
+    username,
+    replyTo,
+    time,
+    content,
+    love,
+    replyContent,
+    replyId,
+    currentUserId
+}) => {
     const [like, setLike] = useState<boolean>(false);
+    const { userId } = loginStore;
     const handleLike = () => {
 
     }
@@ -30,27 +47,29 @@ const ReplyItem: FC<ReplyItemProps> = ({ commentId, username, replyTo, time, con
         const clientHeight = document.querySelector(".articleContainer").clientHeight;
         window.scrollTo({ top: clientHeight - 200 });
     }
+   
     return (
-        <div className='replyContainer'>
-            <div className='avatarContainer'>
+        <div styleName='replyContainer'>
+            <div styleName='avatarContainer'>
                 <Avatar icon={<UserOutlined />} size={30} />
             </div>
-            <div className='mainContainer'>
+            <div styleName='mainContainer'>
                 {replyId === 0 ?
                     <>
-                        <div className='title'>
+                        <div styleName='title'>
                             <span>{username}</span>
                             <Divider type='vertical' />
                             <span>{fromNow(time)}</span>
+                            <span styleName="delete">删除</span>
                         </div>
                         <div>{content}</div>
-                        <div className='bottomContainer'>
-                            <div className='flex_container'
+                        <div styleName='bottomContainer'>
+                            <div styleName='flex_container'
                                 onClick={handleLike}>
                                 <span>{like ? likedIcon : likeIcon}</span>
                                 <span>{love == 0 ? '点赞' : love}</span>
                             </div>
-                            <div className='flex_container'
+                            <div styleName='flex_container'
                                 onClick={addReply}>
                                 <span style={{ paddingTop: '2px', paddingLeft: '0.5rem' }}>{commentIcon}</span>
                                 <span>回复</span>
@@ -59,24 +78,25 @@ const ReplyItem: FC<ReplyItemProps> = ({ commentId, username, replyTo, time, con
                     </>
                     :
                     <>
-                        <div className='title'>
+                        <div styleName='title'>
                             <span>{replyTo === null ? username : `${username} 回复 ${' '}${replyTo}`}</span>
                             <Divider type='vertical' />
                             <span>{fromNow(time)}</span>
+                            <span styleName="delete">删除</span>
                         </div>
-                        <div className='contentContainer'>
+                        <div styleName='contentContainer'>
                             {content}
                         </div>
-                        <div className='replyedContainer'>
+                        <div styleName='replyedContainer'>
                             "{replyContent}"
                         </div>
-                        <div className='bottomContainer'>
-                            <div className='flex_container'
+                        <div styleName='bottomContainer'>
+                            <div styleName='flex_container'
                                 onClick={handleLike}>
                                 <span>{like ? likedIcon : likeIcon}</span>
                                 <span>{love == 0 ? '点赞' : love}</span>
                             </div>
-                            <div className='flex_container'
+                            <div styleName='flex_container'
                                 onClick={addReply}>
                                 <span style={{ paddingTop: '2px', paddingLeft: '0.5rem' }}>{commentIcon}</span>
                                 <span>回复</span>
@@ -87,5 +107,9 @@ const ReplyItem: FC<ReplyItemProps> = ({ commentId, username, replyTo, time, con
             </div>
         </div>
     )
+})
+export default (props: ReplyItemProps) => {
+    return (
+        <UserContext Fn={ReplyItem} props={props} />
+    )
 }
-export default ReplyItem

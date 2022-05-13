@@ -4,7 +4,7 @@ import { UserOutlined } from "@ant-design/icons";
 import React,{ useState, useRef, useEffect } from "react";
 import 'antd/dist/antd.css';
 import './style.scss';
-import classNames from "classnames";
+import classname from "classnames";
 export default function UserAnchor(props: any) {
     const [listVisible, setListVisible] = useState<boolean>(false);
     const myRef: any = useRef(null);
@@ -22,9 +22,9 @@ export default function UserAnchor(props: any) {
     return (
         <div ref={myRef}>
             <div onClick={() => { setListVisible(true) }}>
-                <Avatar icon={<UserOutlined />} className='userAnchor' />
+                <Avatar icon={<UserOutlined />} styleName='userAnchor' />
             </div>
-            <div className={classNames({
+            <div styleName={classname({
                 logoutList: true,
                 logoutList_show: !listVisible
             })}>

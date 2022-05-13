@@ -33,6 +33,10 @@ $font-grey-color:#606770;
     --string-color: #7ec699;
     --codebg-color: #2d2d2d;
     --codedefault-color:#ccc;
+    --inputArea--bg-color:rgba(242, 240, 237, 0.891);
+    --inputArea--color:black;
+    --comment-border-color:whitesmoke;
+
 }
 
 :root[data-theme="dark"] {
@@ -56,9 +60,17 @@ $font-grey-color:#606770;
     --string-color: #2aa198;
     --codebg-color: #fdf6e3;
     --codedefault-color:#657b83;
-
+    --inputArea--bg-color:rgb(71, 66, 66);
+    --inputArea--color:#fff;
+    --comment-border-color:rgb(155, 152, 152)
 }
 
 #root {
     background-color: var(--bg-default);
+}
+.icon{
+
+}
+.dancingHeart{
+    
 }

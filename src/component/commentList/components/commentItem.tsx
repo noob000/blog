@@ -1,14 +1,17 @@
 import { Avatar, Divider, message } from "antd"
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useContext, useEffect, useRef, useState, FC } from "react"
 import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
 import { replyItem, ArticleComment } from "@/api/comment";
 import ReplyItem from "./replyItem";
 import CommentContext from "../commentContext";
 import { fromNow } from "@/component/util";
-
-export default function CommentItem(props: ArticleComment) {
-    const { username, time, content, love, replyList, id } = props;
+import loginStore, { Login } from "@/store/login";
+import { observer, useLocalStore } from "mobx-react-lite";
+import UserContext from "@/component/userContext/userIdHoc";
+import "../style.scss";
+const Index: FC<ArticleComment & { currentUserId: number | null }> = observer((props) => {
+    const { username, time, content, love, replyList, id, user_id, currentUserId } = props;
     // const [like, setLike] = useState<boolean>(liked ? true : false);
     const [count, setCount] = useState<number>(love)
     const replyMap = new Map<number, replyItem>();
@@ -27,33 +30,35 @@ export default function CommentItem(props: ArticleComment) {
         const clientHeight = document.querySelector(".articleContainer").clientHeight;
         window.scrollTo({ top: clientHeight - 200 });
     }
+    console.log(user_id, currentUserId)
     return (
-        <div>
-            <div className='commentContainer'>
-                <div className='avatarContainer'>
+        <>
+            <div styleName='commentContainer'>
+                <div styleName='avatarContainer'>
                     <Avatar icon={<UserOutlined />} size={30} />
                 </div>
-                <div className='mainContainer'>
-                    <div className='title'>
+                <div styleName='mainContainer'>
+                    <div styleName='title'>
                         <span>{username}</span>
                         <Divider type='vertical' />
                         <span>{fromNow(time)}</span>
+                        {user_id === currentUserId && <span styleName="delete">删除</span>}
                     </div>
-                    <div className='contentContainer'>
+                    <div styleName='contentContainer'>
                         {content}
                     </div>
-                    <div className='bottomContainer'>
-                        <div className='flex_container'>
+                    <div styleName='bottomContainer'>
+                        <div styleName='flex_container'>
                             <span>{likeIcon}</span>
                             <span>{count == 0 ? '点赞' : count}</span>
                         </div>
-                        <div className='flex_container' onClick={() => { addReply() }}>
+                        <div styleName='flex_container' onClick={() => { addReply() }}>
                             <span style={{ paddingTop: '2px', paddingLeft: '0.5rem' }}>{commentIcon}</span>
                             <span>{replyList?.length > 0 ? replyList?.length : "回复"}</span>
                         </div>
                     </div>
                     <div style={{ width: "100%" }}>
-                        <div className='replyList'>
+                        <div styleName='replyList'>
                             {replyList && replyList.map((element) => {
                                 let { replyTo } = element;
                                 let replyContent: string, replyName: string;
@@ -70,7 +75,7 @@ export default function CommentItem(props: ArticleComment) {
                                     ...element,
                                     replyContent,
                                     replyTo: replyName,
-                                    replyId:replyTo
+                                    replyId: element.id
                                 }
                                 return (
                                     <ReplyItem {...props} key={element.content} />
@@ -81,8 +86,13 @@ export default function CommentItem(props: ArticleComment) {
                 </div>
             </div>
 
-        </div>
+        </>
 
+    )
+})
+export default (props: ArticleComment) => {
+    return (
+        <UserContext Fn={Index} props={props} />
     )
 }
 

@@ -43,13 +43,13 @@ const LoginButton: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
     const modalValue = () => {
         if (buttonState === 'login') {
             return (
-                <div className='loginContainer'>
-                    <div className='titleContainer'>
+                <div styleName='loginContainer'>
+                    <div styleName='titleContainer'>
                         <h2>请填写以下信息进行登录</h2>
                         <Button type='primary' onClick={() => setButtonState('register')}>注册</Button>
                     </div>
 
-                    <div className='formContainer'>
+                    <div styleName='formContainer'>
                         <Form labelAlign={'left'}
                             layout={'vertical'}
                             onFinish={handleLogin}
@@ -82,13 +82,13 @@ const LoginButton: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
         }
         else if (buttonState === 'register') {
             return (
-                <div className='loginContainer'>
-                    <div className='titleContainer'>
+                <div styleName='loginContainer'>
+                    <div styleName='titleContainer'>
                         <h2>请填写以下信息完成注册</h2>
                         <Button type='primary' onClick={() => setButtonState('login')} >登录</Button>
                     </div>
 
-                    <div className='formContainer'>
+                    <div styleName='formContainer'>
                         <Form layout='vertical' onFinish={handleRegister} onFinishFailed={() => Message.error('请正确填入信息')}>
                             <Form.Item
                                 label="邮箱"

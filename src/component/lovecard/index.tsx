@@ -23,11 +23,11 @@ export default function Lovecard() {
     )
     const content = year + '年' + day() + '天';
     return (
-        <div className='card_love'>
-            <div className='avatar_container'>
-                <Avatar src={zhl} size='large' className='zhl' />
-                <span className='heart'>{dancingHeart}</span>
-                <Avatar src={yyx} size='large' className='yyx' />
+        <div styleName='card_love'>
+            <div styleName='avatar_container'>
+                <Avatar src={zhl} size='large' styleName='zhl' />
+                <span styleName='heart'>{dancingHeart}</span>
+                <Avatar src={yyx} size='large' styleName='yyx' />
             </div>
             <p>{content}</p>
         </div>
