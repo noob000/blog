@@ -1,12 +1,11 @@
-import React, { MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Prism from 'prismjs';
 import './style/style.scss';
-// import Comment_area from '../class_trash/commentarea';
+import "./style/highlight.css";
 import { observer } from "mobx-react-lite"
 import articleStore, { ArticleList } from '@/store/article';
 import dayjs from 'dayjs';
 import { articleLikeIcon, articleLikedIcon } from "@/icon"
-import { Button, message } from 'antd';
 import api from '@/api/api';
 import useThrottle from '@/hook/useThrottle';
 import "prismjs/plugins/line-numbers/prism-line-numbers";

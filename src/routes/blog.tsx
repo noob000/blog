@@ -71,7 +71,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
 
 
     return (
-        <div>
+        <div styleName="root">
             <div styleName='nav' id='navigation' >
                 <span styleName='toggle_button'
                     onClick={() => setDrawerVisible(!drawerVisible)}><AlignLeftOutlined style={{ fontSize: '1.5rem' }} /></span>
