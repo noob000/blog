@@ -3,13 +3,13 @@ import React, { useContext, useEffect, useRef, useState, FC } from "react"
 import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
 import { replyItem, ArticleComment } from "@/api/comment";
-import ReplyItem from "./replyItem";
-import CommentContext from "../commentContext";
+import ReplyItem from "../replyItem/replyItem";
+import CommentContext from "../../commentContext";
 import { fromNow } from "@/component/util";
 import loginStore, { Login } from "@/store/login";
 import { observer, useLocalStore } from "mobx-react-lite";
 import UserContext from "@/component/userContext/userIdHoc";
-import "../style.scss";
+import "./style.scss";
 const Index: FC<ArticleComment & { currentUserId: number | null }> = observer((props) => {
     const { username, time, content, love, replyList, id, user_id, currentUserId } = props;
     // const [like, setLike] = useState<boolean>(liked ? true : false);
@@ -30,7 +30,6 @@ const Index: FC<ArticleComment & { currentUserId: number | null }> = observer((p
         const clientHeight = document.querySelector(".articleContainer").clientHeight;
         window.scrollTo({ top: clientHeight - 200 });
     }
-    console.log(user_id, currentUserId)
     return (
         <>
             <div styleName='commentContainer'>

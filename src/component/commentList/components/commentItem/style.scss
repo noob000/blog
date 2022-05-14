@@ -1,0 +1,112 @@
+@import "@/style/basic.scss";
+
+.commentList {
+    margin: 0 auto;
+
+    &>div:last-of-type {
+        border-bottom: none;
+
+    }
+}
+
+.commentContainer {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 0.5px solid var(--comment-border-color);
+    background-color: var(--comment-bg);
+    color: var(--comment-color);
+
+    &:hover {
+        .mainContainer {
+            .title {
+                .delete {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .mainContainer {
+        padding-left: 1rem;
+
+        .title {
+            margin-bottom: 0.5rem;
+
+            .delete {
+                float: right;
+                color: red;
+                cursor: pointer;
+                display: none;
+            }
+        }
+
+        .bottomContainer {
+            padding-top: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+
+            .flex_container {
+                display: flex;
+                align-items: flex-start;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                span {
+                    padding-right: 5px;
+                }
+            }
+
+
+        }
+    }
+}
+
+.replyList {
+    width: 50vw;
+    border-radius: 10px;
+    background-color: var(--reply-bg);
+
+    .replyContainer {
+        padding: 0.5rem;
+        display: flex;
+        width: 100%;
+
+        .contentContainer {
+            padding-bottom: 0.5rem;
+        }
+
+        .replyedContainer {
+            width: 40vw;
+            padding-left: 0.5rem;
+            background-color: var(--replyed-content);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-radius: 4px;
+            border: 1px solid rgb(234, 230, 230);
+            height: 1.5rem;
+            line-height: 1.5rem;
+        }
+    }
+}
+
+.hoverPointer {
+    cursor: pointer;
+}
+
+#inputArea {
+    background-color: var(--inputArea--bg-color);
+    color: var(--inputArea--color);
+}
+
+.commentOutContainer {
+    border-radius: 0.8rem;
+    background-color: var(--comment-bg);
+    padding: 2rem 1rem 2rem 1rem;
+    margin-bottom: 1rem;
+}
+.avatarContainer{}

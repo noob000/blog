@@ -1,15 +1,13 @@
 import { Avatar, Divider, message } from "antd"
-
 import React, { FC, useContext, useEffect, useRef, useState } from "react"
 import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
 import { replyItem } from "@/api/comment";
-import CommentContext from "../commentContext";
+import CommentContext from "../../commentContext";
 import { fromNow } from "@/component/util";
 import { observer } from "mobx-react-lite";
-import loginStore, { Login } from "@/store/login";
 import UserContext from "@/component/userContext/userIdHoc";
-import "../style.scss"
+import "./style.scss"
 interface ReplyItemProps {
     commentId: number;
     username: string;
@@ -19,7 +17,7 @@ interface ReplyItemProps {
     replyContent: string;
     replyId: number;
     replyTo: string;
-    user_id:number
+    user_id: number
 }
 
 const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
@@ -35,7 +33,6 @@ const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
     currentUserId
 }) => {
     const [like, setLike] = useState<boolean>(false);
-    const { userId } = loginStore;
     const handleLike = () => {
 
     }
@@ -47,7 +44,7 @@ const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
         const clientHeight = document.querySelector(".articleContainer").clientHeight;
         window.scrollTo({ top: clientHeight - 200 });
     }
-   
+    const delShow = currentUserId === user_id;
     return (
         <div styleName='replyContainer'>
             <div styleName='avatarContainer'>
@@ -60,7 +57,7 @@ const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
                             <span>{username}</span>
                             <Divider type='vertical' />
                             <span>{fromNow(time)}</span>
-                            <span styleName="delete">删除</span>
+                            {delShow && <span styleName="delete">删除</span>}
                         </div>
                         <div>{content}</div>
                         <div styleName='bottomContainer'>
@@ -82,7 +79,7 @@ const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
                             <span>{replyTo === null ? username : `${username} 回复 ${' '}${replyTo}`}</span>
                             <Divider type='vertical' />
                             <span>{fromNow(time)}</span>
-                            <span styleName="delete">删除</span>
+                            {delShow && <span styleName="delete">删除</span>}
                         </div>
                         <div styleName='contentContainer'>
                             {content}
