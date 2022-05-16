@@ -4,17 +4,16 @@ import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
 import { replyItem, ArticleComment } from "@/api/comment";
 import ReplyItem from "../replyItem/replyItem";
-import CommentContext from "../../commentContext";
+import CommentContext from "@/context/commentContext";
 import { fromNow } from "@/component/util";
-import loginStore, { Login } from "@/store/login";
-import { observer, useLocalStore } from "mobx-react-lite";
-import UserContext from "@/component/userContext/userIdHoc";
 import "./style.scss";
-const Index: FC<ArticleComment & { currentUserId: number | null }> = observer((props) => {
-    const { username, time, content, love, replyList, id, user_id, currentUserId } = props;
-    // const [like, setLike] = useState<boolean>(liked ? true : false);
+import useLogin from "@/hooks/useLogin";
+const Index: FC<ArticleComment> = (props) => {
+    const { username, time, content, love, replyList, id, user_id, } = props;
+    const [like, setLike] = useState<boolean>(false);
     const [count, setCount] = useState<number>(love)
     const replyMap = new Map<number, replyItem>();
+    const { isLogin, userId } = useLogin();
     if (replyList) {
         for (let ele of replyList) {
             replyMap.set(ele.id, ele);
@@ -41,14 +40,14 @@ const Index: FC<ArticleComment & { currentUserId: number | null }> = observer((p
                         <span>{username}</span>
                         <Divider type='vertical' />
                         <span>{fromNow(time)}</span>
-                        {user_id === currentUserId && <span styleName="delete">删除</span>}
+                        {user_id === userId && <span styleName="delete">删除</span>}
                     </div>
                     <div styleName='contentContainer'>
                         {content}
                     </div>
                     <div styleName='bottomContainer'>
                         <div styleName='flex_container'>
-                            <span>{likeIcon}</span>
+                            <span>{like ? likedIcon : likeIcon}</span>
                             <span>{count == 0 ? '点赞' : count}</span>
                         </div>
                         <div styleName='flex_container' onClick={() => { addReply() }}>
@@ -58,7 +57,7 @@ const Index: FC<ArticleComment & { currentUserId: number | null }> = observer((p
                     </div>
                     <div style={{ width: "100%" }}>
                         <div styleName='replyList'>
-                            {replyList && replyList.map((element) => {
+                            {replyList && replyList.map((element, index) => {
                                 let { replyTo } = element;
                                 let replyContent: string, replyName: string;
                                 if (replyTo !== 0) {
@@ -77,7 +76,7 @@ const Index: FC<ArticleComment & { currentUserId: number | null }> = observer((p
                                     replyId: element.id
                                 }
                                 return (
-                                    <ReplyItem {...props} key={element.content} />
+                                    <ReplyItem {...props} key={`${element.content}-${index}`} />
                                 )
                             })}
                         </div>
@@ -86,13 +85,8 @@ const Index: FC<ArticleComment & { currentUserId: number | null }> = observer((p
             </div>
 
         </>
-
-    )
-})
-export default (props: ArticleComment) => {
-    return (
-        <UserContext Fn={Index} props={props} />
     )
 }
+export default Index
 
 

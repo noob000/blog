@@ -1,13 +1,12 @@
-import { addArticleComment, addArticleReply } from "@/api/comment";
-import loginStore, { Login } from "@/store/login";
+import commentApi from "@/api/comment";
 import { Button, message as Message } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import { observer } from "mobx-react-lite";
 import React, { FC, useContext, useState } from "react";
-import CommentContext, { ReplyTo } from "../../commentContext";
+import CommentContext, { ReplyTo } from "@/context/commentContext";
 import "./style.scss";
-const Index: FC<{ loginStore: Login, id: number }> = observer(({ loginStore, id }) => {
-    const { isLogin, userId, username, openModal } = loginStore;
+import useLogin from "@/hooks/useLogin";
+const Index: FC<{ id: number }> = ({ id }) => {
+    const { isLogin, userId, username, openModal } = useLogin();
     const [value, setValue] = useState<string>("");
     const { replyTo, commentId, type, setType, setReplyTo, setCommentId, setRefresh } = useContext(CommentContext);
     const handleClick = () => {
@@ -15,7 +14,7 @@ const Index: FC<{ loginStore: Login, id: number }> = observer(({ loginStore, id 
         else {
             if (value !== "") {
                 if (type === "comment") {
-                    addArticleComment(id, value, userId)
+                    commentApi.addArticleComment(id, value, userId)
                         .then(({ message, statusCode }) => {
                             if (message === "success" && statusCode === 0) {
                                 Message.success("成功提交！");
@@ -26,7 +25,7 @@ const Index: FC<{ loginStore: Login, id: number }> = observer(({ loginStore, id 
                         })
                 }
                 else if (type === "reply") {
-                    addArticleReply(id, userId, username, value, (replyTo as ReplyTo).replyId, commentId)
+                    commentApi.addArticleReply(id, userId, username, value, (replyTo as ReplyTo).replyId, commentId)
                         .then(({ message, statusCode }) => {
                             if (message === "success" && statusCode === 0) {
                                 Message.success("成功提交！");
@@ -65,5 +64,5 @@ const Index: FC<{ loginStore: Login, id: number }> = observer(({ loginStore, id 
         </div>
 
     )
-})
-export default ({ id }: { id: number }) => <Index loginStore={loginStore} id={id} /> 
+}
+export default Index

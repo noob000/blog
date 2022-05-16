@@ -3,11 +3,10 @@ import React, { FC, useContext, useEffect, useRef, useState } from "react"
 import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
 import { replyItem } from "@/api/comment";
-import CommentContext from "../../commentContext";
+import CommentContext from "@/context/commentContext";
 import { fromNow } from "@/component/util";
-import { observer } from "mobx-react-lite";
-import UserContext from "@/component/userContext/userIdHoc";
 import "./style.scss"
+import useLogin from "@/hooks/useLogin";
 interface ReplyItemProps {
     commentId: number;
     username: string;
@@ -20,7 +19,7 @@ interface ReplyItemProps {
     user_id: number
 }
 
-const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
+const ReplyItem: FC<ReplyItemProps> = ({
     commentId,
     user_id,
     username,
@@ -30,9 +29,9 @@ const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
     love,
     replyContent,
     replyId,
-    currentUserId
 }) => {
     const [like, setLike] = useState<boolean>(false);
+    const { isLogin, userId } = useLogin();
     const handleLike = () => {
 
     }
@@ -44,7 +43,7 @@ const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
         const clientHeight = document.querySelector(".articleContainer").clientHeight;
         window.scrollTo({ top: clientHeight - 200 });
     }
-    const delShow = currentUserId === user_id;
+    const delShow = userId === user_id;
     return (
         <div styleName='replyContainer'>
             <div styleName='avatarContainer'>
@@ -104,9 +103,5 @@ const ReplyItem: FC<ReplyItemProps & { currentUserId: number }> = observer(({
             </div>
         </div>
     )
-})
-export default (props: ReplyItemProps) => {
-    return (
-        <UserContext Fn={ReplyItem} props={props} />
-    )
 }
+export default ReplyItem

@@ -16,7 +16,7 @@ const LoginButton: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
                 const { message, id,username } = data;
                 if (statusCode === 0 && message === "success") {
                     Message.success("登录成功");
-                    login(id,username);
+                    login(data);
                     closeModal()
                 }
                 else if (statusCode === 0) Message.error(`${message}`);

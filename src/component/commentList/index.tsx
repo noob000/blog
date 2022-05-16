@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import './style.scss';
-import CommentItem from './components/commentItem';
-import { addArticleComment, addArticleReply, ArticleComment, getArticleComment } from "@/api/comment";
+import CommentItem from './components/commentItem/commentItem';
+import commentApi, { ArticleComment } from "@/api/comment";
 import { observer } from "mobx-react-lite";
 import NewComment from "./components/textarea/textarea";
-import CommentContext, { ReplyTo } from "./commentContext";
+import CommentContext, { ReplyTo } from "@/context/commentContext";
 interface CommentListProps {
     id: number;
 }
@@ -15,12 +15,11 @@ const CommentList = observer(({ id }: CommentListProps) => {
     const [replyTo, setReplyTo] = useState<ReplyTo | null>(null);
     const [refresh, setRefresh] = useState<number>(0)
     useEffect(() => {
-        getArticleComment(id)
+        commentApi.getArticleComment(id)
             .then((res) => {
                 setCommentList(res as any)
             })
     }, [refresh])
-
     return (
         <div styleName="commentOutContainer">
             <CommentContext.Provider value={{
