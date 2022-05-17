@@ -6,7 +6,6 @@ import { replyItem } from "@/api/comment";
 import CommentContext from "@/context/commentContext";
 import { fromNow } from "@/component/util";
 import "./style.scss"
-import useLogin from "@/hooks/useLogin";
 interface ReplyItemProps {
     commentId: number;
     username: string;
@@ -31,10 +30,7 @@ const ReplyItem: FC<ReplyItemProps> = ({
     replyId,
 }) => {
     const [like, setLike] = useState<boolean>(false);
-    const { isLogin, userId } = useLogin();
-    const handleLike = () => {
-
-    }
+  
     const { type, setType, setCommentId, setReplyTo } = useContext(CommentContext);
     const addReply = () => {
         if (type === "comment") setType("reply");
@@ -43,7 +39,7 @@ const ReplyItem: FC<ReplyItemProps> = ({
         const clientHeight = document.querySelector(".articleContainer").clientHeight;
         window.scrollTo({ top: clientHeight - 200 });
     }
-    const delShow = userId === user_id;
+    const handleLike=()=>{}
     return (
         <div styleName='replyContainer'>
             <div styleName='avatarContainer'>
@@ -56,7 +52,6 @@ const ReplyItem: FC<ReplyItemProps> = ({
                             <span>{username}</span>
                             <Divider type='vertical' />
                             <span>{fromNow(time)}</span>
-                            {delShow && <span styleName="delete">删除</span>}
                         </div>
                         <div>{content}</div>
                         <div styleName='bottomContainer'>
@@ -78,7 +73,6 @@ const ReplyItem: FC<ReplyItemProps> = ({
                             <span>{replyTo === null ? username : `${username} 回复 ${' '}${replyTo}`}</span>
                             <Divider type='vertical' />
                             <span>{fromNow(time)}</span>
-                            {delShow && <span styleName="delete">删除</span>}
                         </div>
                         <div styleName='contentContainer'>
                             {content}

@@ -2,7 +2,7 @@
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import React,{ useState, useRef, useEffect } from "react";
-import 'antd/dist/antd.css';
+
 import './style.scss';
 import classname from "classnames";
 export default function UserAnchor(props: any) {

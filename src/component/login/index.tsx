@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FC } from "react";
-import './style.scss';
+// import './style.scss';
 import loginStore, { Login } from "@/store/login";
 import { observer } from "mobx-react-lite";
 import UserAnchor from "../userAnchor";
@@ -10,7 +10,7 @@ const Index: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
         <>
             {isLogin ?
                 <UserAnchor /> :
-                <LoginButton loginStore={loginStore} />
+                <div/>
             }
         </>
     )

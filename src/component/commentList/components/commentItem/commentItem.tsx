@@ -7,13 +7,11 @@ import ReplyItem from "../replyItem/replyItem";
 import CommentContext from "@/context/commentContext";
 import { fromNow } from "@/component/util";
 import "./style.scss";
-import useLogin from "@/hooks/useLogin";
 const Index: FC<ArticleComment> = (props) => {
     const { username, time, content, love, replyList, id, user_id, } = props;
     const [like, setLike] = useState<boolean>(false);
     const [count, setCount] = useState<number>(love)
     const replyMap = new Map<number, replyItem>();
-    const { isLogin, userId } = useLogin();
     if (replyList) {
         for (let ele of replyList) {
             replyMap.set(ele.id, ele);
@@ -40,7 +38,6 @@ const Index: FC<ArticleComment> = (props) => {
                         <span>{username}</span>
                         <Divider type='vertical' />
                         <span>{fromNow(time)}</span>
-                        {user_id === userId && <span styleName="delete">删除</span>}
                     </div>
                     <div styleName='contentContainer'>
                         {content}

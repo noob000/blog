@@ -10,19 +10,15 @@ import api from '@/api/api';
 import useThrottle from '@/hooks/useThrottle';
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import TextArea from 'antd/lib/input/TextArea';
-import loginStore, { Login } from '@/store/login';
 import CommentList from '../commentlist';
-import LoginContext from '../../context/loginContext';
 interface ArticleProps {
     id: number;
     articleStore: ArticleList,
-    loginStore: Login
 }
 
 const Article_Content = observer((props: ArticleProps) => {
-    const { id, articleStore, loginStore } = props;
+    const { id, articleStore} = props;
     const { getArticle } = articleStore;
-    const { isLogin, articleLike } = loginStore;
     const [like, setLike] = useState<boolean>(false);
     const fn = (state: boolean) => {
         let likeStr = localStorage.getItem("like");
@@ -60,15 +56,13 @@ const Article_Content = observer((props: ArticleProps) => {
     useLayoutEffect(() => {
         Prism.highlightAll()
     }, [])
-    useEffect(() => {
-        if (articleLike) setLike(articleLike.has(String(id)))
-    }, [articleLike])
+  
     const updateLove = () => {
 
     }
     return (
         <div>
-            <LoginContext.Provider value={{ loginStore: loginStore }}>
+           
                 <div styleName='article_outconatiner'>
                     <div>
                         <div styleName='articleContainer'>
@@ -90,10 +84,10 @@ const Article_Content = observer((props: ArticleProps) => {
                     </div>
 
                 </div>
-            </LoginContext.Provider>
+           
         </div>
     )
 })
 export default ({ id }: { id: number }) =>
-    <Article_Content id={id} articleStore={articleStore} loginStore={loginStore} />
+    <Article_Content id={id} articleStore={articleStore} />
 
