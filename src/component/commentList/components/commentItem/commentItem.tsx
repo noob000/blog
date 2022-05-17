@@ -7,10 +7,10 @@ import ReplyItem from "../replyItem/replyItem";
 import CommentContext from "@/context/commentContext";
 import { fromNow } from "@/component/util";
 import "./style.scss";
+import useLove from "@/hooks/useLove";
 const Index: FC<ArticleComment> = (props) => {
-    const { username, time, content, love, replyList, id, user_id, } = props;
-    const [like, setLike] = useState<boolean>(false);
-    const [count, setCount] = useState<number>(love)
+    const { username, time, content, love, replyList, id} = props;
+    const [like, handleLike,count] = useLove("comment", id,love);
     const replyMap = new Map<number, replyItem>();
     if (replyList) {
         for (let ele of replyList) {
@@ -44,7 +44,7 @@ const Index: FC<ArticleComment> = (props) => {
                     </div>
                     <div styleName='bottomContainer'>
                         <div styleName='flex_container'>
-                            <span>{like ? likedIcon : likeIcon}</span>
+                            <span onClick={handleLike}>{like ? likedIcon : likeIcon}</span>
                             <span>{count == 0 ? '点赞' : count}</span>
                         </div>
                         <div styleName='flex_container' onClick={() => { addReply() }}>

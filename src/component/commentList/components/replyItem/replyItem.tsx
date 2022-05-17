@@ -6,6 +6,7 @@ import { replyItem } from "@/api/comment";
 import CommentContext from "@/context/commentContext";
 import { fromNow } from "@/component/util";
 import "./style.scss"
+import useLove from "@/hooks/useLove";
 interface ReplyItemProps {
     commentId: number;
     username: string;
@@ -29,8 +30,7 @@ const ReplyItem: FC<ReplyItemProps> = ({
     replyContent,
     replyId,
 }) => {
-    const [like, setLike] = useState<boolean>(false);
-  
+    const [like, handleLike, count] = useLove("reply", replyId, love)
     const { type, setType, setCommentId, setReplyTo } = useContext(CommentContext);
     const addReply = () => {
         if (type === "comment") setType("reply");
@@ -39,7 +39,6 @@ const ReplyItem: FC<ReplyItemProps> = ({
         const clientHeight = document.querySelector(".articleContainer").clientHeight;
         window.scrollTo({ top: clientHeight - 200 });
     }
-    const handleLike=()=>{}
     return (
         <div styleName='replyContainer'>
             <div styleName='avatarContainer'>
@@ -58,7 +57,7 @@ const ReplyItem: FC<ReplyItemProps> = ({
                             <div styleName='flex_container'
                                 onClick={handleLike}>
                                 <span>{like ? likedIcon : likeIcon}</span>
-                                <span>{love == 0 ? '点赞' : love}</span>
+                                <span>{count == 0 ? '点赞' : count}</span>
                             </div>
                             <div styleName='flex_container'
                                 onClick={addReply}>
@@ -84,7 +83,7 @@ const ReplyItem: FC<ReplyItemProps> = ({
                             <div styleName='flex_container'
                                 onClick={handleLike}>
                                 <span>{like ? likedIcon : likeIcon}</span>
-                                <span>{love == 0 ? '点赞' : love}</span>
+                                <span>{count == 0 ? '点赞' : count}</span>
                             </div>
                             <div styleName='flex_container'
                                 onClick={addReply}>

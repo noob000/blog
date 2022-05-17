@@ -11,80 +11,45 @@ import useThrottle from '@/hooks/useThrottle';
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import TextArea from 'antd/lib/input/TextArea';
 import CommentList from '../commentlist';
+import useLove from '@/hooks/useLove';
 interface ArticleProps {
     id: number;
     articleStore: ArticleList,
 }
 
 const Article_Content = observer((props: ArticleProps) => {
-    const { id, articleStore} = props;
+    const { id, articleStore } = props;
     const { getArticle } = articleStore;
-    const [like, setLike] = useState<boolean>(false);
-    const fn = (state: boolean) => {
-        let likeStr = localStorage.getItem("like");
-        if (state) {
-            let likeArr: any = likeStr.split(" ");
-            likeArr = likeArr.filter((element: string) => element !== String(id));
-            likeStr = likeArr.join(" ");
-            localStorage.setItem("like", likeStr);
-            api.updateArticleLike("minus", id).then(() => {
-                setLike(false);
-            })
-        }
-        else {
-            if (!likeStr) {
-                localStorage.setItem("like", String(id));
-                api.updateArticleLike("add", id).then(() => {
-                    setLike(true);
-                })
-
-            }
-            else {
-                let likeArr = likeStr.split(" ");
-                likeArr.push(String(id));
-                likeStr = likeArr.join(" ");
-                localStorage.setItem("like", likeStr);
-                api.updateArticleLike("add", id).then(() => {
-                    setLike(true);
-                })
-            }
-        }
-    }
-    const handleLike = useThrottle(fn);
     const { article_content, catalogue, time } = getArticle(id);
-
+    const [love,setLove] = useLove("article",id)    
     useLayoutEffect(() => {
         Prism.highlightAll()
     }, [])
-  
-    const updateLove = () => {
-
-    }
     return (
         <div>
-           
-                <div styleName='article_outconatiner'>
-                    <div>
-                        <div styleName='articleContainer'>
-                            <div dangerouslySetInnerHTML={{ __html: article_content }} />
-                            <div styleName='detail'>
-                                <span>文章发布于：{dayjs(time).format("YYYY-MM-DD HH:MM")}</span>
-                                <div styleName="article-icon" onClick={() => handleLike(like)}>{like ? articleLikedIcon : articleLikeIcon}</div>
-                            </div>
-                        </div>
-                        <CommentList id={id} />
-                    </div>
-                    <div style={{ position: "relative" }}>
-                        {catalogue && <div styleName="cataContainer">
-                            <p styleName='cataTitle'>目录</p>
-                            <div
-                                style={{ paddingLeft: "10px" }}
-                                dangerouslySetInnerHTML={{ __html: catalogue }} />
-                        </div>}
-                    </div>
 
+            <div styleName='article_outconatiner'>
+                <div>
+                    <div styleName='articleContainer'>
+                        <div dangerouslySetInnerHTML={{ __html: article_content }} />
+                        <div styleName='detail'>
+                            <span>文章发布于：{dayjs(time).format("YYYY-MM-DD HH:MM")}</span>
+                            <div styleName="article-icon" onClick={setLove}>{love ? articleLikedIcon : articleLikeIcon}</div>
+                        </div>
+                    </div>
+                    <CommentList id={id} />
                 </div>
-           
+                <div style={{ position: "relative" }}>
+                    {catalogue && <div styleName="cataContainer">
+                        <p styleName='cataTitle'>目录</p>
+                        <div
+                            style={{ paddingLeft: "10px" }}
+                            dangerouslySetInnerHTML={{ __html: catalogue }} />
+                    </div>}
+                </div>
+
+            </div>
+
         </div>
     )
 })
