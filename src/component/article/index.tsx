@@ -22,7 +22,7 @@ interface ArticleProps {
 const Article_Content = observer((props: ArticleProps) => {
     const { id, articleStore, loginStore } = props;
     const { getArticle } = articleStore;
-    const { isLogin, articleLike } = loginStore;
+    const { isLogin, articleLike, updateArticleLike} = loginStore;
     const [like, setLike] = useState<boolean>(false);
     const fn = (state: boolean) => {
         let likeStr = localStorage.getItem("like");
@@ -64,7 +64,7 @@ const Article_Content = observer((props: ArticleProps) => {
         if (articleLike) setLike(articleLike.has(String(id)))
     }, [articleLike])
     const updateLove = () => {
-
+        
     }
     return (
         <div>

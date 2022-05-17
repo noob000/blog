@@ -40,22 +40,6 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
         }
         return articleLink;
     }
-    // useEffect(() => {
-    //     request.get('http://localhost:3000/get_articleAmount')
-    //         .then((res) => setArticleAmount(res.data))
-
-    // }, [])//获取数据
-    // useEffect(() => {
-    //     const bottomObserver = new IntersectionObserver((entries) => {
-    //         if (entries[0].intersectionRatio <= 0) {
-    //             setBottomVisible(false)
-    //         }
-    //         else if (entries[0].intersectionRatio > 0) {
-    //             setBottomVisible(true)
-    //         }
-    //     })
-    //     bottomObserver.observe(document.querySelector('.site_info') as Element);
-    // }, [])//判断底部信息栏是否出现在视野
     useEffect(() => {
         api.getArticleList().then((res: any) => {
             inital(res)

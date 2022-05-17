@@ -4,7 +4,7 @@ import './style.scss';
 import ArticleItem from "./articleItem";
 import api, { ArticleItemProps } from "@/api/api";
 import { observer } from "mobx-react-lite";
-export default observer((props: any) => {
+export default (props: any) => {
     const { width, articleStore } = props;
     const { refresh, articleList } = articleStore;
     const articlelist = () => {
@@ -19,4 +19,4 @@ export default observer((props: any) => {
             {articleList.size > 0 && articlelist()}
         </div>
     )
-})
+}

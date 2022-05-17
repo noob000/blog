@@ -2,11 +2,12 @@ import { Avatar, Divider, message } from "antd"
 import React, { FC, useContext, useEffect, useRef, useState } from "react"
 import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
-import { replyItem } from "@/api/comment";
+import commentApi, { replyItem } from "@/api/comment";
 import CommentContext from "@/context/commentContext";
 import { fromNow } from "@/component/util";
 import "./style.scss"
 import useLogin from "@/hooks/useLogin";
+import { observer } from "mobx-react-lite";
 interface ReplyItemProps {
     commentId: number;
     username: string;
@@ -31,9 +32,15 @@ const ReplyItem: FC<ReplyItemProps> = ({
     replyId,
 }) => {
     const [like, setLike] = useState<boolean>(false);
-    const { isLogin, userId } = useLogin();
+    const { isLogin, userId, replyLike, openModal, updateReplyLike } = useLogin();
+    const [count, setCount] = useState<number>(love)
     const handleLike = () => {
-
+        if (!isLogin) openModal()
+        else {
+            const type = like ? "minus" : "add"
+            updateReplyLike(type, replyId)
+            setCount((prev) => like ? prev - 1 : prev + 1)
+        }
     }
     const { type, setType, setCommentId, setReplyTo } = useContext(CommentContext);
     const addReply = () => {
@@ -44,6 +51,11 @@ const ReplyItem: FC<ReplyItemProps> = ({
         window.scrollTo({ top: clientHeight - 200 });
     }
     const delShow = userId === user_id;
+    useEffect(() => {
+        if (replyLike !== undefined) {
+            setLike(replyLike.has(String(replyId)))
+        }
+    });
     return (
         <div styleName='replyContainer'>
             <div styleName='avatarContainer'>
@@ -60,10 +72,9 @@ const ReplyItem: FC<ReplyItemProps> = ({
                         </div>
                         <div>{content}</div>
                         <div styleName='bottomContainer'>
-                            <div styleName='flex_container'
-                                onClick={handleLike}>
-                                <span>{like ? likedIcon : likeIcon}</span>
-                                <span>{love == 0 ? '点赞' : love}</span>
+                            <div styleName='flex_container'>
+                                <span onClick={handleLike}>{like ? likedIcon : likeIcon}</span>
+                                <span>{count == 0 ? '点赞' : love}</span>
                             </div>
                             <div styleName='flex_container'
                                 onClick={addReply}>
@@ -87,10 +98,9 @@ const ReplyItem: FC<ReplyItemProps> = ({
                             "{replyContent}"
                         </div>
                         <div styleName='bottomContainer'>
-                            <div styleName='flex_container'
-                                onClick={handleLike}>
-                                <span>{like ? likedIcon : likeIcon}</span>
-                                <span>{love == 0 ? '点赞' : love}</span>
+                            <div styleName='flex_container'>
+                                <span onClick={handleLike}>{like ? likedIcon : likeIcon}</span>
+                                <span>{count == 0 ? '点赞' : love}</span>
                             </div>
                             <div styleName='flex_container'
                                 onClick={addReply}>

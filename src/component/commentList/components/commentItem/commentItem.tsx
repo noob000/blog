@@ -11,9 +11,9 @@ import useLogin from "@/hooks/useLogin";
 const Index: FC<ArticleComment> = (props) => {
     const { username, time, content, love, replyList, id, user_id, } = props;
     const [like, setLike] = useState<boolean>(false);
-    const [count, setCount] = useState<number>(love)
+    const [count, setCount] = useState<number>(love);
     const replyMap = new Map<number, replyItem>();
-    const { isLogin, userId } = useLogin();
+    const { isLogin, userId, commentLike, updateCommentLike, openModal } = useLogin();
     if (replyList) {
         for (let ele of replyList) {
             replyMap.set(ele.id, ele);
@@ -29,6 +29,18 @@ const Index: FC<ArticleComment> = (props) => {
         const clientHeight = document.querySelector(".articleContainer").clientHeight;
         window.scrollTo({ top: clientHeight - 200 });
     }
+    const updateLove = () => {
+        if (!isLogin) openModal()
+        else {
+            const type = like ? "minus" : "add";
+            updateCommentLike(type, id);
+            setCount((prev) => like ? prev - 1 : prev + 1)
+        }
+    }
+    useEffect(() => {
+        if (commentLike !== undefined)
+            setLike(commentLike.has(String(id)))
+    })
     return (
         <>
             <div styleName='commentContainer'>
@@ -47,7 +59,7 @@ const Index: FC<ArticleComment> = (props) => {
                     </div>
                     <div styleName='bottomContainer'>
                         <div styleName='flex_container'>
-                            <span>{like ? likedIcon : likeIcon}</span>
+                            <span onClick={updateLove}>{like ? likedIcon : likeIcon}</span>
                             <span>{count == 0 ? '点赞' : count}</span>
                         </div>
                         <div styleName='flex_container' onClick={() => { addReply() }}>
@@ -87,6 +99,7 @@ const Index: FC<ArticleComment> = (props) => {
         </>
     )
 }
-export default Index
+
+export default Index;
 
 

@@ -2,13 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import './style.scss';
 import CommentItem from './components/commentItem/commentItem';
 import commentApi, { ArticleComment } from "@/api/comment";
-import { observer } from "mobx-react-lite";
 import NewComment from "./components/textarea/textarea";
 import CommentContext, { ReplyTo } from "@/context/commentContext";
 interface CommentListProps {
     id: number;
 }
-const CommentList = observer(({ id }: CommentListProps) => {
+const CommentList = ({ id }: CommentListProps) => {
     const [commentList, setCommentList] = useState<ArticleComment[]>([]);
     const [type, setType] = useState<"reply" | "comment">("comment");
     const [commentId, setCommentId] = useState<number>(-1);
@@ -39,7 +38,7 @@ const CommentList = observer(({ id }: CommentListProps) => {
             </CommentContext.Provider>
         </div>
     )
-})
+}
 const prodList = (commentList: ArticleComment[]) => commentList.length > 0 ?
     commentList.map((element) => <CommentItem
         {...element}
