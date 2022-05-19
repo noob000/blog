@@ -1,12 +1,11 @@
 import commentApi from "@/api/comment";
-import { Button, Form, Input, message as Message } from "antd";
+import { Button, Form, FormInstance, Input, message as Message } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import React, { FC, useContext, useState } from "react";
+import React, { FC, RefObject, useContext, useRef, useState } from "react";
 import CommentContext, { ReplyTo } from "@/context/commentContext";
 import "./style.scss";
 const Index: FC<{ id: number }> = ({ id }) => {
-
-    const [value, setValue] = useState<string>("");
+    const formRef = useRef<FormInstance>(null);
     const { replyTo, commentId, type, setType, setReplyTo, setCommentId, setRefresh } = useContext(CommentContext);
     const handleSubmit = (values: { username: string, email: string, content: string }) => {
         const { username, email, content } = values;
@@ -20,20 +19,20 @@ const Index: FC<{ id: number }> = ({ id }) => {
                     .then(({ message, statusCode }) => {
                         if (message === "success" && statusCode === 0) {
                             Message.success("成功提交！");
-                            setValue("");
-                            setRefresh();
+                            formRef.current.resetFields();
+                            setRefresh()
                         }
                         else Message.error(message);
                     })
             }
             else if (type === "reply") {
-                commentApi.addArticleReply(id, email, username, content,(replyTo as ReplyTo).replyId, commentId)
+                commentApi.addArticleReply(id, email, username, content, (replyTo as ReplyTo).replyId, commentId)
                     .then(({ message, statusCode }) => {
                         if (message === "success" && statusCode === 0) {
                             Message.success("成功提交！");
-                            setValue("");
+                            formRef.current.resetFields();
                             setRefresh();
-
+                            cancelReply()
                         }
                         else Message.error(message);
                     })
@@ -52,12 +51,12 @@ const Index: FC<{ id: number }> = ({ id }) => {
     const placeholder = replyTo === null ? "请输入您的评论" : `回复:${(replyTo as ReplyTo).username}`
     return (
         <div styleName="formContainer">
-            <Form styleName="darkMode" onFinish={handleSubmit}>
+            <Form styleName="darkMode"
+                onFinish={handleSubmit}
+                ref={formRef}>
                 <Form.Item name="content" label="内容" required wrapperCol={{ span: 15 }} >
                     <TextArea
                         rows={3}
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
                         placeholder={placeholder}
                         id="inputArea"
                     /></Form.Item>
