@@ -13,6 +13,10 @@
         padding-top: 1.5rem;
     }
 
+    .cardContainer {
+        margin-bottom: 1rem;
+        ;
+    }
 
 
 }
@@ -28,17 +32,27 @@
             display: flex;
             flex-direction: column;
             width: 80%;
-            .articlelist{
-                order:1;
+
+            .articlelist {
+                order: 1;
             }
-            .cardContainer{
-                width:100%;
-                order:0;
-                margin-bottom:1rem;
+
+            .cardContainer {
+                order: -100;
             }
         }
 
 
     }
 
+}
+
+@media only screen and (max-width:800px) {
+    .main_wrapper .home_container {
+        width: 95vw;
+    }
+
+    .cardContainer {
+        order: -100;
+    }
 }

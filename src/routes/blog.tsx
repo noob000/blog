@@ -5,16 +5,13 @@ import Home from './home';
 // import Blog_part from './blog_part';
 import './style/blog.scss';
 import '@/style/basic.scss';
-import { Tooltip, Drawer } from 'antd';
-import { ToTopOutlined, AlignLeftOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
+import { ToTopOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import Article from '../component/article';
 // import Bottombar from '../component/bottombar';
-import Comment from './comment';
 import ThemeButton from '../component/themeButton';
 import { useState, useEffect, useRef } from "react";
-import Cookies from 'js-cookie';
 import articleStore, { ArticleList } from "@/store/article";
-import request from "@/api/base";
 import { observer } from "mobx-react-lite";
 import api from "@/api/api";
 import 'antd/dist/antd.css';
@@ -28,7 +25,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
     const [bottomBarVisible, setBottomVisible] = useState<boolean>(false);
     const { articleList, inital } = articleStore;
     const { pathname } = useLocation();
-
+    const navigate = useNavigate();
     const prodArticleLink = () => {
         let articleLink = [];
         for (let { id } of articleList.values()) {
@@ -55,10 +52,9 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
     return (
         <div styleName="root">
             <div styleName='nav' id='navigation' >
-                <span styleName='toggle_button'
-                    onClick={() => setDrawerVisible(!drawerVisible)}><AlignLeftOutlined style={{ fontSize: '1.5rem' }} /></span>
+                <span onClick={() => navigate("/")}> <ArrowLeftOutlined /></span>
                 <span styleName='logo'>no_OBlog</span>
-                <ul style={{marginTop:0}}>
+                <ul style={{ marginTop: 0 }}>
                     <li ><Link
                         to='/'
                         styleName={pathname === "/" ? 'selectedLi' : ''}>home</Link></li>

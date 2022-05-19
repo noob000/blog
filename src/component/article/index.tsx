@@ -21,13 +21,12 @@ const Article_Content = observer((props: ArticleProps) => {
     const { id, articleStore } = props;
     const { getArticle } = articleStore;
     const { article_content, catalogue, time } = getArticle(id);
-    const [love,setLove] = useLove("article",id)    
+    const [love, setLove] = useLove("article", id)
     useLayoutEffect(() => {
         Prism.highlightAll()
     }, [])
     return (
-        <div>
-
+        <>
             <div styleName='article_outconatiner'>
                 <div>
                     <div styleName='articleContainer'>
@@ -39,18 +38,21 @@ const Article_Content = observer((props: ArticleProps) => {
                     </div>
                     <CommentList id={id} />
                 </div>
-                <div style={{ position: "relative" }}>
-                    {catalogue && <div styleName="cataContainer">
-                        <p styleName='cataTitle'>目录</p>
-                        <div
-                            style={{ paddingLeft: "10px" }}
-                            dangerouslySetInnerHTML={{ __html: catalogue }} />
-                    </div>}
-                </div>
+                {
+                    catalogue &&
+                    <div styleName='relativeContainer'>
+                        <div styleName="cataContainer">
+                            <p styleName='cataTitle'>目录</p>
+                            <div
+                                style={{ paddingLeft: "10px" }}
+                                dangerouslySetInnerHTML={{ __html: catalogue }} />
+                        </div>
 
+                    </div>
+                }
             </div>
 
-        </div>
+        </>
     )
 })
 export default ({ id }: { id: number }) =>

@@ -33,7 +33,7 @@
             font-size: 20px;
             color: var(--font-default);
 
-            
+
 
             :hover {
                 color: #3578e5;
@@ -49,9 +49,11 @@
     .search_750px {
         display: none;
     }
+
     .selectedLi {
         color: #3578e5;
     }
+
     .login_button {
         background-color: rgb(38, 144, 243);
         color: white;
@@ -124,7 +126,6 @@
 @media screen and (max-width: 1200px) {
     .nav {
         justify-content: space-between;
-        padding-left: 1rem;
 
         .flex-bar {
             width: 1px;
@@ -149,4 +150,12 @@
 
         }
     }
+}
+
+@media only screen and (max-width:800px) {
+
+    .toTop {
+        display: none;
+    }
+
 }

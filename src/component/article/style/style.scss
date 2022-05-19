@@ -1,10 +1,11 @@
 @import "@/style/basic.scss";
 
 .article_outconatiner {
-    width: 85vw;
+    max-width: 85vw;
     margin: 0 auto;
     border-radius: 1rem;
     display: flex;
+    justify-content: center;
 
     h1,
     h2,
@@ -18,10 +19,15 @@
 
     .articleContainer {
         background-color: var(--bg-article);
-        width: 60vw;
+        width: 65vw;
         padding: 2rem 1rem 2rem 1rem;
         border-radius: 0.8rem;
         margin: 0 0 2rem 0;
+
+        code {
+            overflow-x: scroll;
+        }
+
 
         img {
             display: block;
@@ -70,3 +76,19 @@
 
 }
 
+.relativeContainer {
+    position: relative;
+}
+
+@media only screen and (max-width:1000px) {
+
+    .relativeContainer {
+        display: none;
+    }
+}
+@media only screen and (max-width:600px) {
+
+    .article_outconatiner .articleContainer {
+        width:99vw;
+    }
+}
