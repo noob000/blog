@@ -15,6 +15,7 @@ import articleStore, { ArticleList } from "@/store/article";
 import { observer } from "mobx-react-lite";
 import api from "@/api/api";
 import 'antd/dist/antd.css';
+import Comment from "./comment"
 interface loginStateType {
     username: string | null,
     user_id: number | null,
@@ -90,7 +91,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                     <>
                         {articleList.size > 0 && prodArticleLink()}
                     </>
-                    {/* <Route path='/comment' element={<Comment loginState={loginState} />} /> */}
+                    <Route path='/comment' element={<Comment/>} />
                 </Routes>
             </div>
             {/* <Bottombar /> */}

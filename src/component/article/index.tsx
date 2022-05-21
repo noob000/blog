@@ -10,7 +10,7 @@ import api from '@/api/api';
 import useThrottle from '@/hooks/useThrottle';
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import TextArea from 'antd/lib/input/TextArea';
-import CommentList from '../commentlist';
+import CommentList from '../commentList';
 import useLove from '@/hooks/useLove';
 interface ArticleProps {
     id: number;

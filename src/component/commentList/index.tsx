@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import './style.scss';
-import CommentItem from './components/commentItem/commentItem';
+import CommentItem from './components/commentItem/index'
 import commentApi, { ArticleComment } from "@/api/comment";
 import { observer } from "mobx-react-lite";
-import NewComment from "./components/textarea/textarea";
+import NewComment from "./components/textArea/index"
 import CommentContext, { ReplyTo } from "@/context/commentContext";
 interface CommentListProps {
     id: number;

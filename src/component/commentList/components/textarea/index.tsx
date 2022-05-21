@@ -1,10 +1,10 @@
 import commentApi from "@/api/comment";
 import { Button, Form, FormInstance, Input, message as Message } from "antd";
-import TextArea from "antd/lib/input/TextArea";
 import React, { FC, RefObject, useContext, useRef, useState } from "react";
 import CommentContext, { ReplyTo } from "@/context/commentContext";
 import "./style.scss";
-const Index: FC<{ id: number }> = ({ id }) => {
+const Index: FC<{ id?: number }> = ({ id }) => {
+    const { TextArea } = Input;
     const formRef = useRef<FormInstance>(null);
     const { replyTo, commentId, type, setType, setReplyTo, setCommentId, setRefresh } = useContext(CommentContext);
     const handleSubmit = (values: { username: string, email: string, content: string }) => {
@@ -57,8 +57,8 @@ const Index: FC<{ id: number }> = ({ id }) => {
                 <Form.Item name="content" label="内容" required wrapperCol={{ span: 15 }} >
                     <TextArea
                         rows={3}
-                        placeholder={placeholder}
-                        id="inputArea"
+                    placeholder={placeholder}
+                    id="inputArea"
                     /></Form.Item>
                 <Form.Item name="username"
                     label="昵称"
