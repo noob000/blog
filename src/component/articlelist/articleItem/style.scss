@@ -1,6 +1,8 @@
 @import "@/style/basic.scss";
+
 .infor_number {
     padding: 0px 0px 0px 0.3rem;
+    white-space: nowrap;
 }
 
 .read_button {
@@ -21,6 +23,7 @@
         display: none;
     }
 }
+
 .articleItem {
     width: auto;
     height: auto;
@@ -30,6 +33,7 @@
     border-radius: 1rem;
     background-color: var(--bg-articlelist);
     color: var(--font-default);
+
     &:hover {
         box-shadow: 5px #D3D3D3
     }
@@ -43,6 +47,7 @@
         height: 10rem;
         width: 100%;
         font-size: 0.8rem;
+
         .bottom_container {
             width: 100%;
             display: flex;
@@ -54,12 +59,23 @@
             .iconContainer {
                 display: flex;
                 align-items: center;
-
+                flex-wrap: nowrap;
                 overflow: hidden;
+
+                .flexContainer {
+                    display: flex;
+                    align-items: center;
+
+                }
             }
         }
     }
 }
-.article_content{
-    
+@media only screen and (max-width:500px) {
+
+    .catagory {
+        display: none;
+    }
 }
+.article_content {}
+

@@ -33,7 +33,7 @@ const CommentList = observer(({ id }: CommentListProps) => {
             }}>
                 <NewComment id={id} />
                 <div styleName='commentList'>
-                    <h2>全部评论</h2>
+                    <h2 style={{marginTop:"1rem"}}>全部评论</h2>
                     {prodList(commentList)}
                 </div>
             </CommentContext.Provider>
