@@ -4,14 +4,13 @@ import './style/style.scss';
 import "./style/highlight.css";
 import dayjs from 'dayjs';
 import { articleLikeIcon, articleLikedIcon } from "@/icon"
-import api from '@/api/api';
-import "prismjs/plugins/line-numbers/prism-line-numbers";
+import api, { ArticleItemProps } from '@/api/api';
 import CommentList from '../commentList';
 import useLove from '@/hooks/useLove';
 import useArticle from '@/hooks/useArticle';
 
 const Article_Content: FC<{ id: number }> = ({ id }) => {
-    const { article_content, catalogue, time } = useArticle(id)
+    const { article_content, catalogue, time } = useArticle(id) as ArticleItemProps
     const [love, setLove] = useLove("article", id)
     useLayoutEffect(() => {
         Prism.highlightAll()
@@ -46,5 +45,5 @@ const Article_Content: FC<{ id: number }> = ({ id }) => {
         </>
     )
 }
-export default Article_Content 
+export default Article_Content
 

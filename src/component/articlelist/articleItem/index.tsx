@@ -5,7 +5,7 @@ import { dateIcon, commentIcon, visitIcon, likeIcon, folderIcon } from "../../..
 import api, { ArticleItemProps } from "@/api/api";
 import dayjs from "dayjs";
 import "./style.scss"
-const ArticleItem: FC<ArticleItemProps> = ({ title, article_content, time, love, view, catagory, id, article_info, }) => {
+const ArticleItem: FC<ArticleItemProps> = ({ title,time, love, view, catagory, id, article_info, }) => {
     const updateView = () => api.updateView(id)
 
     return (

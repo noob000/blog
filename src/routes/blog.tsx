@@ -86,7 +86,8 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
             </div>
             <div>
                 <ArticleContext.Provider value={{
-                    getArticle: articleStore.getArticle
+                    getArticle: articleStore.getArticle,
+                    getAllArticle: articleStore.getAllArticle
                 }}>
                     <Routes>
                         <Route path='/' element={<Home />} />

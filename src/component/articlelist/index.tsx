@@ -1,22 +1,16 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import './style.scss';
 import ArticleItem from "./articleItem";
 import api, { ArticleItemProps } from "@/api/api";
-import { observer } from "mobx-react-lite";
-export default observer((props: any) => {
-    const { width, articleStore } = props;
-    const { refresh, articleList } = articleStore;
-    const articlelist = () => {
-        const result = [];
-        for (let v of articleList.values()) {
-            result.push(<ArticleItem {...v} key={v.id} />)
-        }
-        return result;
-    }
+import useArticle from "@/hooks/useArticle";
+export default () => {
+    const articleList = useArticle() as ArticleItemProps[];
     return (
         <div styleName='articlelist'>
-            {articleList.size > 0 && articlelist()}
+            {articleList.length > 0
+                && articleList.map((v) =>
+                    <ArticleItem {...v} key={v.id} />
+                )}
         </div>
     )
-})
+}
