@@ -16,6 +16,7 @@ import { observer } from "mobx-react-lite";
 import api from "@/api/api";
 import 'antd/dist/antd.css';
 import Comment from "./comment"
+import ArticleContext from "@/context/article";
 interface loginStateType {
     username: string | null,
     user_id: number | null,
@@ -48,7 +49,6 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
     window.onresize = () => {
         setClientWidth(window.innerWidth);
     }
-
 
     return (
         <div styleName="root">
@@ -85,17 +85,19 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
 
             </div>
             <div>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-
-                    <>
+                <ArticleContext.Provider value={{
+                    getArticle: articleStore.getArticle
+                }}>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
                         {articleList.size > 0 && prodArticleLink()}
-                    </>
-                    <Route path='/comment' element={<Comment/>} />
-                </Routes>
+                        <Route path='/comment' element={<Comment />} />
+                    </Routes>
+                </ArticleContext.Provider>
             </div>
             {/* <Bottombar /> */}
-        </div>
+
+        </div >
     )
 })
 export type { loginStateType };

@@ -1,26 +1,17 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Prism from 'prismjs';
 import './style/style.scss';
 import "./style/highlight.css";
-import { observer } from "mobx-react-lite"
-import articleStore, { ArticleList } from '@/store/article';
 import dayjs from 'dayjs';
 import { articleLikeIcon, articleLikedIcon } from "@/icon"
 import api from '@/api/api';
-import useThrottle from '@/hooks/useThrottle';
 import "prismjs/plugins/line-numbers/prism-line-numbers";
-import TextArea from 'antd/lib/input/TextArea';
 import CommentList from '../commentList';
 import useLove from '@/hooks/useLove';
-interface ArticleProps {
-    id: number;
-    articleStore: ArticleList,
-}
+import useArticle from '@/hooks/useArticle';
 
-const Article_Content = observer((props: ArticleProps) => {
-    const { id, articleStore } = props;
-    const { getArticle } = articleStore;
-    const { article_content, catalogue, time } = getArticle(id);
+const Article_Content: FC<{ id: number }> = ({ id }) => {
+    const { article_content, catalogue, time } = useArticle(id)
     const [love, setLove] = useLove("article", id)
     useLayoutEffect(() => {
         Prism.highlightAll()
@@ -54,7 +45,6 @@ const Article_Content = observer((props: ArticleProps) => {
 
         </>
     )
-})
-export default ({ id }: { id: number }) =>
-    <Article_Content id={id} articleStore={articleStore} />
+}
+export default Article_Content 
 
