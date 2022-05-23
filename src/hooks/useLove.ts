@@ -22,7 +22,7 @@ const useLove = (
     const handleLove = () => {
         const type = love ? "minus" : "add"
         const str: string | null = localStorage.getItem(catagory);
-        commentApi.updateLove(catagory, id, type)
+        commentApi.updateLove(catagory, type, id)
         if (type === "add") {
             if (str !== null) {
                 let likeArr = str.split(",");

@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = {
     entry: {
         app: './src/index.tsx',
@@ -9,6 +10,9 @@ module.exports = {
             title: 'dev',
             template: './public/index.html'
         }),
+        new ForkTsCheckerWebpackPlugin({
+            
+        })
     ],
     output: {
         filename: '[name].bundle.js',

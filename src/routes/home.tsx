@@ -13,7 +13,7 @@ export default function Home() {
         <div styleName='main_wrapper'>
             <div styleName='home_container'>
 
-                <Articlelist width={width} articleStore={articleStore} />
+                <Articlelist/>
                 <div styleName='cardContainer'>
                     <Lovecard />
                     <IntroCard/>
