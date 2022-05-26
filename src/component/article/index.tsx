@@ -26,7 +26,7 @@ const Article_Content: FC<{ id: number }> = ({ id }) => {
                             <div styleName="article-icon" onClick={setLove}>{love ? articleLikedIcon : articleLikeIcon}</div>
                         </div>
                     </div>
-                    <CommentList id={id} />
+                    <CommentList id={id} catagory="article"/>
                 </div>
                 {
                     catalogue &&

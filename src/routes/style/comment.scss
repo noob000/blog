@@ -1,63 +1,7 @@
 @import "../../style/basic.scss";
 
-.comment {
-    
-    .main_container {
-        display: flex;
-        flex-direction: row;
-        width: auto;
-        height: auto;
-        padding: 10px 5px 5px 5px;
-        align-items: flex-start;
-        background-color: var(--comment-bg);
-        color:var(--comment-color);
-        .avatar {
-            margin: 2px
-        }
-
-        .right_part {
-            padding-left: 10px;
-            display: flex;
-            flex-direction: column;
-
-            .infor_container {
-                padding-left: 0px;
-                padding-top: 5px;
-               
-
-                .author {
-                    padding-right: 10px;
-                }
-            }
-
-            .bottom_container {
-                display: flex;
-                justify-content: flex-start;
-                padding-left: 0px;
-
-                .like {
-                    padding-right: 10px;
-                    cursor: pointer;
-                    transition: 0s;
-
-                    &:hover {
-                        color: black
-                    }
-                }
-
-                .reply {
-                    position: relative;
-                    top: -1px;
-                    cursor: pointer;
-
-                    &:hover {
-                        color: black
-                    }
-                }
-
-            }
-        }
-    }
-
-
+.commentWrapper {
+    width:65vw;
+    margin: 0 auto;
 }
+
