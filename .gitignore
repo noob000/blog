@@ -2,3 +2,4 @@ node_modules
 /src/api
 dist
 .cz.config.js
+/src/.DS_Store
