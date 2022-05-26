@@ -2,13 +2,13 @@ import { Avatar, Divider, message } from "antd"
 import React, { useContext, useEffect, useRef, useState, FC } from "react"
 import { likeIcon, likedIcon, commentIcon } from "@/icon"
 import { UserOutlined } from '@ant-design/icons';
-import { replyItem, ArticleComment } from "@/api/comment";
+import { replyItem, ArticleComment, baseComment } from "@/api/comment";
 import ReplyItem from "../replyItem/replyItem";
 import CommentContext from "@/context/commentContext";
 import { fromNow } from "@/component/util";
 import "./style.scss";
 import useLove from "@/hooks/useLove";
-const Index: FC<ArticleComment> = (props) => {
+const Index: FC<ArticleComment|baseComment> = (props) => {
     const { username, time, content, love, replyList, id} = props;
     const [like, handleLike,count] = useLove("comment", id,love);
     const replyMap = new Map<number, replyItem>();

@@ -6,7 +6,7 @@ import "./style.scss";
 const Index: FC<{ id?: number }> = ({ id }) => {
     const { TextArea } = Input;
     const formRef = useRef<FormInstance>(null);
-    const { replyTo, commentId, type, setType, setReplyTo, setCommentId, setRefresh } = useContext(CommentContext);
+    const { replyTo, commentId, type, setType, setReplyTo, setCommentId, setRefresh, catagory } = useContext(CommentContext);
     const handleSubmit = (values: { username: string, email: string, content: string }) => {
         const { username, email, content } = values;
         if (/(com|weixin)/.test(username)) {
@@ -15,27 +15,45 @@ const Index: FC<{ id?: number }> = ({ id }) => {
         }
         if (content !== "") {
             if (type === "comment") {
-                commentApi.addArticleComment(id, content, username, email)
-                    .then(({ message, statusCode }) => {
-                        if (message === "success" && statusCode === 0) {
-                            Message.success("成功提交！");
-                            formRef.current.resetFields();
-                            setRefresh()
-                        }
-                        else Message.error(message);
-                    })
+                if (catagory === "article") {
+                    commentApi.addArticleComment(id, content, username, email)
+                        .then(({ message, statusCode }) => {
+                            if (message === "success" && statusCode === 0) {
+                                Message.success("成功提交！");
+                                formRef.current.resetFields();
+                                setRefresh()
+                            }
+                            else Message.error(message);
+                        })
+                }
+                else if (catagory === "list") {
+                    commentApi.addListComment({ username, email, content })
+                        .then(({ message }) => {
+                            if (message === "success") {
+                                Message.success("成功提交！");
+                                formRef.current.resetFields();
+                                setRefresh()
+                            }
+                            else Message.error(message);
+                        })
+                }
             }
             else if (type === "reply") {
-                commentApi.addArticleReply(id, email, username, content, (replyTo as ReplyTo).replyId, commentId)
-                    .then(({ message, statusCode }) => {
-                        if (message === "success" && statusCode === 0) {
-                            Message.success("成功提交！");
-                            formRef.current.resetFields();
-                            setRefresh();
-                            cancelReply()
-                        }
-                        else Message.error(message);
-                    })
+                if (catagory === "article") {
+                    commentApi.addArticleReply(id, email, username, content, (replyTo as ReplyTo).replyId, commentId)
+                        .then(({ message, statusCode }) => {
+                            if (message === "success" && statusCode === 0) {
+                                Message.success("成功提交！");
+                                formRef.current.resetFields();
+                                setRefresh();
+                                cancelReply()
+                            }
+                            else Message.error(message);
+                        })
+                }
+                else {
+                    commentApi.addListReply({ username, email, commentId, content, replyTo: (replyTo.replyId as number) })
+                }
             }
         }
         else {
@@ -54,16 +72,19 @@ const Index: FC<{ id?: number }> = ({ id }) => {
             <Form styleName="darkMode"
                 onFinish={handleSubmit}
                 ref={formRef}>
+
                 <Form.Item name="content" label="内容" required wrapperCol={{ span: 15 }} >
                     <TextArea
-                        rows={3}
-                    placeholder={placeholder}
-                    id="inputArea"
-                    /></Form.Item>
+                        rows={4}
+                        placeholder={placeholder}
+                        id="inputArea"
+                    />
+                </Form.Item>
                 <Form.Item name="username"
                     label="昵称"
                     rules={[{ required: true, message: '请输入您的帐号或昵称' }]}
-                    wrapperCol={{ span: 7 }}>
+                    wrapperCol={{ span: 7 }}
+                >
                     <Input />
                 </Form.Item>
                 <Form.Item
