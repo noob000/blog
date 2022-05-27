@@ -53,6 +53,15 @@ const Index: FC<{ id?: number }> = ({ id }) => {
                 }
                 else {
                     commentApi.addListReply({ username, email, commentId, content, replyTo: (replyTo.replyId as number) })
+                        .then(({ message }) => {
+                            if (message === "success") {
+                                Message.success("成功提交！");
+                                formRef.current.resetFields();
+                                setRefresh();
+                                cancelReply()
+                            }
+                            else Message.error(message);
+                        })
                 }
             }
         }
@@ -68,7 +77,7 @@ const Index: FC<{ id?: number }> = ({ id }) => {
     }
     const placeholder = replyTo === null ? "请输入您的评论" : `回复:${(replyTo as ReplyTo).username}`
     return (
-        <div styleName="formContainer">
+        <div styleName="formContainer" id="formContainer">
             <Form styleName="darkMode"
                 onFinish={handleSubmit}
                 ref={formRef}>

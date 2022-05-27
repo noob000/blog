@@ -1,14 +1,10 @@
 //逻辑：挂载时发送一次请求，获取评论区内容，用户每增加一条评论或者回复触发一次更新，发送请求将新的评论或者回复添加到数据库，并再次发送请求获取改变后的评论区内容。
 import { useEffect, useState } from "react";
 import './style/comment.scss';
-import { Input, Button, message } from 'antd';
-import classname from 'classnames';
-import moment from "moment";
 import React from "react";
-import { useThrottle } from "@/component/util";
 import { loginStateType } from './blog';
 import request from "@/api/base";
-import NewComment from "@/component/commentList/components/textArea/index"
+import CommenArea from "@/component/commentList/index"
 import commentApi from "@/api/comment";
 interface CommentProps {
     loginState: loginStateType | null
@@ -23,7 +19,7 @@ export default function Comment() {
     }, [count])
     return (
         <div styleName="commentWrapper">
-            <NewComment />
+            <CommenArea catagory={"list"} />
         </div>
     )
 }
