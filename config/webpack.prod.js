@@ -49,7 +49,7 @@ module.exports = merge(common, {
     },
   },
   externals:{
-    react:"react",
-    "react-dom":"react-dom"
+    react:"React",
+    "react-dom":"ReactDOM"
   }
 });
