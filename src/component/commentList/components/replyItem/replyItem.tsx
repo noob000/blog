@@ -31,13 +31,15 @@ const ReplyItem: FC<ReplyItemProps> = ({
     replyId,
 }) => {
     const [like, handleLike, count] = useLove("reply", replyId, love)
-    const { type, setType, setCommentId, setReplyTo } = useContext(CommentContext);
+    const { type, setType, setCommentId, setReplyTo, catagory } = useContext(CommentContext);
     const addReply = () => {
         if (type === "comment") setType("reply");
         setCommentId(commentId);
         setReplyTo({ username, replyId });
-        const clientHeight = document.querySelector(".articleContainer").clientHeight;
-        window.scrollTo({ top: clientHeight - 200 });
+        let clientHeight: number;
+        if (catagory === "article") clientHeight = document.querySelector("#articleContainer").clientHeight;
+        else clientHeight = document.querySelector("#formContainer").clientHeight;
+        window.scrollTo({ top: clientHeight - 200,behavior:"smooth" });
     }
     return (
         <div styleName='replyContainer'>

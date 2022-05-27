@@ -19,7 +19,7 @@ const Article_Content: FC<{ id: number }> = ({ id }) => {
         <>
             <div styleName='article_outconatiner'>
                 <div>
-                    <div styleName='articleContainer'>
+                    <div styleName='articleContainer' id="articleContainer">
                         <div dangerouslySetInnerHTML={{ __html: article_content }} />
                         <div styleName='detail'>
                             <span>文章发布于：{dayjs(time).format("YYYY-MM-DD HH:MM")}</span>
