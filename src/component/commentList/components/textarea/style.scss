@@ -1,14 +1,15 @@
 @import "@/style/basic.scss";
 
 .formContainer {
-    padding-left:5rem;
+    padding-left: 5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid whitesmoke;
-    width:100%;
+    width: 100%;
     overflow: hidden;
+
     .darkMode {
         margin: 0 auto;
-       
+
 
         label {
             color: var(--font-default);
@@ -24,7 +25,13 @@
             color: var(--font-default);
         }
     }
-   
+
 }
 
 .confirmButton {}
+
+@media only screen and (max-width:575px) {
+    .formContainer {
+        padding: 0px;
+    }
+}

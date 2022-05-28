@@ -54,7 +54,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
         <div styleName="root">
             <div styleName='nav' id='navigation' >
                 <span onClick={() => navigate("/")} styleName="backButton"> <ArrowLeftOutlined /></span>
-                <span styleName='logo'>no_OBlog</span>
+                <span styleName='logo' onClick={() => navigate("/")}>no_OBlog</span>
                 <ul style={{ marginTop: 0 }}>
                     <li ><Link
                         to='/'

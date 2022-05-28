@@ -36,7 +36,7 @@ $font-grey-color:#606770;
     --inputArea--bg-color: rgba(242, 240, 237, 0.891);
     --inputArea--color: black;
     --comment-border-color: whitesmoke;
-
+    --svg-color:black;
 }
 
 :root[data-theme="dark"] {
@@ -62,7 +62,8 @@ $font-grey-color:#606770;
     --codedefault-color: #657b83;
     --inputArea--bg-color: rgb(71, 66, 66);
     --inputArea--color: #fff;
-    --comment-border-color: rgb(155, 152, 152)
+    --comment-border-color: rgb(155, 152, 152);
+    --svg-color:rgb(197, 192, 192);
 }
 
 .root {

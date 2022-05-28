@@ -72,6 +72,9 @@
         cursor: pointer;
         border-color: var(--font-default);
 
+        svg {
+            fill:var(--svg-color)
+        }
     }
 
 }
@@ -86,9 +89,10 @@
         display: none;
     }
 }
+
 @media only screen and (max-width:600px) {
 
     .article_outconatiner .articleContainer {
-        width:99vw;
+        width: 99vw;
     }
 }
