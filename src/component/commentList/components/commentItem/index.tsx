@@ -10,7 +10,6 @@ import "./style.scss";
 import useLove from "@/hooks/useLove";
 const Index: FC<ArticleComment | baseComment> = (props) => {
     const { username, time, content, love, replyList, id } = props;
-    const [like, handleLike, count] = useLove("comment", id, love);
     const replyMap = new Map<number, replyItem>();
     if (replyList) {
         for (let ele of replyList) {
@@ -18,6 +17,8 @@ const Index: FC<ArticleComment | baseComment> = (props) => {
         }
     }
     const { type, setType, setCommentId, setReplyTo, catagory } = useContext(CommentContext);
+    const cata = catagory === "list" ? "list" : "article_comment";
+    const [like, handleLike, count] = useLove(cata, id, love);
     const addReply = (replyId = 0) => {
         if (type === "comment") {
             setType("reply");

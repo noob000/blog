@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import useThrottle from "./useThrottle";
 
 const useLove = (
-    catagory: "article" | "comment" | "reply",
+    catagory: "article" | "list" | "reply" | "article_comment",
     id: number,
-    loveCount = 0): [boolean, () => void,number] => {
+    loveCount = 0): [boolean, () => void, number] => {
     const [love, setLove] = useState<boolean>(false);
     const [cata, setCata] = useState<string>(catagory);
     const [count, setCount] = useState<number>(loveCount)
@@ -41,6 +41,6 @@ const useLove = (
             setCount((prev) => prev - 1)
         }
     }
-    return [love, useThrottle(handleLove),count];
+    return [love, useThrottle(handleLove), count];
 }
 export default useLove;

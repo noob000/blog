@@ -11,17 +11,16 @@ const LoginButton: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
     const [buttonState, setButtonState] = useState<"register" | "login">('login');
     const [loadingButton, setLoadingButton] = useState<boolean>(false);
     const handleLogin = ({ email, password }: { email: string, password: string }) => {
-        api.login({ email, password })
-            .then((data) => {
-                const { message, id,username } = data;
-                if (data) {
-                    Message.success("登录成功");
-                    login(data);
-                    closeModal()
-                }
+        // api.login({ email, password })
+        //     .then((data) => {
+        //         const { message, id,username } = data;
+        //         if (data) {
+        //             Message.success("登录成功");
+        //             login(data);
+        //             closeModal()
+        //         }
               
-            })
-
+        //     })
     }
     const handleRegister = (value: any) => {
         const { email, password, username } = value;

@@ -18,7 +18,7 @@ const Index: FC<{ id?: number }> = ({ id }) => {
                 if (catagory === "article") {
                     commentApi.addArticleComment(id, content, username, email)
                         .then((data) => {
-                            if (data === "success") {
+                            if (data !=="error") {
                                 Message.success("成功提交！");
                                 formRef.current.resetFields();
                                 setRefresh()
@@ -28,12 +28,11 @@ const Index: FC<{ id?: number }> = ({ id }) => {
                 else if (catagory === "list") {
                     commentApi.addListComment({ username, email, content })
                         .then((data) => {
-                            if (data === "success") {
+                            if (data !=="error") {
                                 Message.success("成功提交！");
                                 formRef.current.resetFields();
                                 setRefresh()
                             }
-
                         })
                 }
             }
@@ -41,7 +40,7 @@ const Index: FC<{ id?: number }> = ({ id }) => {
                 if (catagory === "article") {
                     commentApi.addArticleReply(id, email, username, content, (replyTo as ReplyTo).replyId, commentId)
                         .then((data) => {
-                            if (data) {
+                            if (data!=="error") {
                                 Message.success("成功提交！");
                                 formRef.current.resetFields();
                                 setRefresh();
@@ -52,7 +51,7 @@ const Index: FC<{ id?: number }> = ({ id }) => {
                 else {
                     commentApi.addListReply({ username, email, commentId, content, replyTo: (replyTo.replyId as number) })
                         .then((data) => {
-                            if (data === "success") {
+                            if (data !=="error") {
                                 Message.success("成功提交！");
                                 formRef.current.resetFields();
                                 setRefresh();
