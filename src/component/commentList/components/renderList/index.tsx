@@ -10,8 +10,8 @@ const RenderList: FC<{ data: CommentType }> = ({ data }) => {
     useEffect(() => {
         let result: CommentType[] = [], temp: CommentType = [];
         data.forEach((element) => {
-            if (temp.length < 5) temp.push(element);
-            else if (temp.length === 5) {
+            if (temp.length < 8) temp.push(element);
+            else if (temp.length === 8) {
                 result.push(temp);
                 temp = [element];
             }
@@ -31,7 +31,7 @@ const RenderList: FC<{ data: CommentType }> = ({ data }) => {
                 <Pagination total={data.length}
                     defaultCurrent={1}
                     current={currPage}
-                    defaultPageSize={10}
+                    defaultPageSize={8}
                     onChange={(page) => { setCurrPage(page) }}
                     style={{ float: "right" }}
                 />}
