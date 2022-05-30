@@ -17,50 +17,47 @@ const Index: FC<{ id?: number }> = ({ id }) => {
             if (type === "comment") {
                 if (catagory === "article") {
                     commentApi.addArticleComment(id, content, username, email)
-                        .then(({ message, statusCode }) => {
-                            if (message === "success" && statusCode === 0) {
+                        .then((data) => {
+                            if (data === "success") {
                                 Message.success("成功提交！");
                                 formRef.current.resetFields();
                                 setRefresh()
                             }
-                            else Message.error(message);
                         })
                 }
                 else if (catagory === "list") {
                     commentApi.addListComment({ username, email, content })
-                        .then(({ message }) => {
-                            if (message === "success") {
+                        .then((data) => {
+                            if (data === "success") {
                                 Message.success("成功提交！");
                                 formRef.current.resetFields();
                                 setRefresh()
                             }
-                            else Message.error(message);
+
                         })
                 }
             }
             else if (type === "reply") {
                 if (catagory === "article") {
                     commentApi.addArticleReply(id, email, username, content, (replyTo as ReplyTo).replyId, commentId)
-                        .then(({ message, statusCode }) => {
-                            if (message === "success" && statusCode === 0) {
+                        .then((data) => {
+                            if (data) {
                                 Message.success("成功提交！");
                                 formRef.current.resetFields();
                                 setRefresh();
                                 cancelReply()
                             }
-                            else Message.error(message);
                         })
                 }
                 else {
                     commentApi.addListReply({ username, email, commentId, content, replyTo: (replyTo.replyId as number) })
-                        .then(({ message }) => {
-                            if (message === "success") {
+                        .then((data) => {
+                            if (data === "success") {
                                 Message.success("成功提交！");
                                 formRef.current.resetFields();
                                 setRefresh();
                                 cancelReply()
                             }
-                            else Message.error(message);
                         })
                 }
             }

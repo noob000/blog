@@ -12,15 +12,14 @@ const LoginButton: FC<{ loginStore: Login }> = observer(({ loginStore }) => {
     const [loadingButton, setLoadingButton] = useState<boolean>(false);
     const handleLogin = ({ email, password }: { email: string, password: string }) => {
         api.login({ email, password })
-            .then(({ statusCode, data }) => {
+            .then((data) => {
                 const { message, id,username } = data;
-                if (statusCode === 0 && message === "success") {
+                if (data) {
                     Message.success("登录成功");
                     login(data);
                     closeModal()
                 }
-                else if (statusCode === 0) Message.error(`${message}`);
-                else Message.error("服务器错误");
+              
             })
 
     }

@@ -10,7 +10,7 @@ const useList = (refresh: number, type: "article" | "list", id?: number) => {
             })
         }
         else if (type === "list") {
-            commentApi.getListComment().then(({ data }) => {
+            commentApi.getListComment().then((data) => {
                 setCommentList(data)
             })
         }

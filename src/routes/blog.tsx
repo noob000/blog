@@ -49,7 +49,6 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
     window.onresize = () => {
         setClientWidth(window.innerWidth);
     }
-
     return (
         <div styleName="root">
             <div styleName='nav' id='navigation' >

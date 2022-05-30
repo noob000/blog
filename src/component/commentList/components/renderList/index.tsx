@@ -16,7 +16,6 @@ const RenderList: FC<{ data: CommentType }> = ({ data }) => {
                 temp = [element];
             }
         })
-        console.log(result)
         result.push(temp);
         setList(result);
     }, [data])

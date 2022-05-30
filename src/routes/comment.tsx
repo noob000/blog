@@ -13,7 +13,7 @@ export default function Comment() {
     const [count, setCount] = useState(0);//用于判断用户添加回复和新评论后是否需要重新发送请求获取评论列表
     const [list, setList] = useState<any>([])
     useEffect(() => {
-        commentApi.getListComment().then(({ data }) => {
+        commentApi.getListComment().then((data) => {
             setList(data)
         })
     }, [count])
