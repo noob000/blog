@@ -1,7 +1,6 @@
-const env = ["development", "production"];
 
 module.exports = api => {
-  const isDev = api.env(env)
+  const isDev = api.env() === "dev";
   return {
     "presets": [["@babel/env"], "@babel/react", "@babel/typescript"],
 

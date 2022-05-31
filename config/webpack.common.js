@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const { webpack,EnvironmentPlugin } = require('webpack');
+const isDev = process.env["BABEL_ENV"] === "dev";
 module.exports = {
     entry: {
         app: './src/index.tsx',
@@ -12,11 +12,9 @@ module.exports = {
             template: './public/index.html'
         }),
         new ForkTsCheckerWebpackPlugin({
-            
+
         }),
-        new EnvironmentPlugin({
-            "NODE_ENV":"development"
-        })
+
     ],
     output: {
         filename: '[name].bundle.js',
@@ -39,7 +37,7 @@ module.exports = {
                             sourceMap: true,
                             importLoaders: 1,
                             modules: {
-                                localIdentName: '[path]_[local]',
+                                localIdentName: isDev ? '[path]_[local]' :"[hash:base64]",
                             },
                         },
                     },
