@@ -7,9 +7,9 @@ module.exports = api => {
     // Babel >= 7.13.0 (https://babeljs.io/docs/en/assumptions)
     "plugins": [
       [
-        "react-css-modules",
+        "@dr.pogodin/react-css-modules",
         {
-          "generateScopedName": isDev ? "[path]_[local]" : "[hash:base64]",
+          "generateScopedName": !isDev ? "[path]_[local]" : "[local]__[hash:base64:5]",
           "filetypes": {
             ".scss": { "syntax": "postcss-scss" }
           },

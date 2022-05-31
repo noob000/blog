@@ -1072,6 +1072,30 @@
   resolved "https://registry.npmmirror.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
+"@dr.pogodin/babel-plugin-react-css-modules@^6.8.0":
+  version "6.8.0"
+  resolved "https://registry.npmmirror.com/@dr.pogodin/babel-plugin-react-css-modules/-/babel-plugin-react-css-modules-6.8.0.tgz#b27801ce0260cb7e0220c050122f2c02400f2e4e"
+  integrity sha512-9kunUQFg6uOAuHVA4HG4lcPotFAwihBm0isBijP/zjgiS8e1YtVVnLvShk1hQXTbyuksrhNe8DV2O1D2arCG3g==
+  dependencies:
+    "@babel/plugin-syntax-jsx" "^7.16.7"
+    "@babel/types" "^7.17.0"
+    "@dr.pogodin/postcss-modules-parser" "^1.2.5"
+    ajv "^8.6.3"
+    ajv-keywords "^5.0.0"
+    cssesc "^3.0.0"
+    loader-utils "^3.2.0"
+    postcss-modules-extract-imports "^3.0.0"
+    postcss-modules-local-by-default "^4.0.0"
+    postcss-modules-scope "^3.0.0"
+    postcss-modules-values "^4.0.0"
+
+"@dr.pogodin/postcss-modules-parser@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.npmmirror.com/@dr.pogodin/postcss-modules-parser/-/postcss-modules-parser-1.2.5.tgz#ad53470bd863d91d90fe2cc24fe43f5a949b0ad3"
+  integrity sha512-MFthcPIQwF3ao2tdbTMXUwTtHN396lawr+WcrC4nIII7QpsAXLFZPh/wcnogutZJ48aMLjIuv0Tm96xi+gkZHw==
+  dependencies:
+    icss-utils "^5.1.0"
+
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.0.5"
   resolved "https://registry.npmmirror.com/@jridgewell/resolve-uri/-/resolve-uri-3.0.5.tgz#68eb521368db76d040a6315cdb24bf2483037b9c"
@@ -1532,7 +1556,7 @@ ajv@^6.12.4, ajv@^6.12.5, ajv@^6.5.3:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-ajv@^8.0.0, ajv@^8.8.0:
+ajv@^8.0.0, ajv@^8.6.3, ajv@^8.8.0:
   version "8.11.0"
   resolved "https://registry.npmmirror.com/ajv/-/ajv-8.11.0.tgz#977e91dd96ca669f54a11e23e378e33b884a565f"
   integrity sha512-wGgprdCvMalC0BztXvitD2hC04YffAvtsUn93JbGXYLAtCUO4xd17mCCZQxUOItiBwZvJScWo8NIvQMQ71rdpg==
@@ -2806,6 +2830,13 @@ generic-names@^2.0.1:
   dependencies:
     loader-utils "^1.1.0"
 
+generic-names@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmmirror.com/generic-names/-/generic-names-4.0.0.tgz#0bd8a2fd23fe8ea16cbd0a279acd69c06933d9a3"
+  integrity sha512-ySFolZQfw9FoDb3ed9d80Cm9f0+r7qj+HJkWjeD9RBfpxEVTlVhol+gvaQB/78WbwYfbnNh8nWHHBSlg072y6A==
+  dependencies:
+    loader-utils "^3.2.0"
+
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.npmmirror.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
@@ -3403,6 +3434,11 @@ loader-utils@^2.0.0:
     big.js "^5.2.2"
     emojis-list "^3.0.0"
     json5 "^2.1.2"
+
+loader-utils@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npmmirror.com/loader-utils/-/loader-utils-3.2.0.tgz#bcecc51a7898bee7473d4bc6b845b23af8304d4f"
+  integrity sha512-HVl9ZqccQihZ7JM85dco1MvO9G+ONvxoGa9rkhzFsneGLKSUg1gJf9bWzhRhcvm2qChhWpebQhP44qxjKIUCaQ==
 
 locate-path@^3.0.0:
   version "3.0.0"

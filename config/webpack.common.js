@@ -26,26 +26,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.s[ac]ss$/i,
-                use: [
-                    // 将 JS 字符串生成为 style 节点
-                    'style-loader',
-                    // 将 CSS 转化成 CommonJS 模块
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            importLoaders: 1,
-                            modules: {
-                                localIdentName: isDev ? '[path]_[local]' : "[hash:base64]",
-                            },
-                        },
-                    },
-                    // 将 Sass 编译成 CSS
-                    'sass-loader',
-                ],
-            },
-            {
                 test: /\.css$/i,
                 use: ['style-loader', {
                     loader: 'css-loader',
