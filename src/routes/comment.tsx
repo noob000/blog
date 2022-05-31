@@ -2,7 +2,6 @@
 import './style/comment.scss';
 import React from "react";
 import { loginStateType } from './blog';
-import request from "@/api/base";
 import CommentArea from "@/component/commentList/index"
 interface CommentProps {
     loginState: loginStateType | null
