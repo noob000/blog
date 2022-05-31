@@ -2,6 +2,7 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { EnvironmentPlugin } = require("webpack")
 module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
@@ -16,12 +17,35 @@ module.exports = merge(common, {
         "data-target": "example",
       },
     }),
+    new EnvironmentPlugin({
+      "NODE_ENV": "production"
+    })
   ],
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // 将 JS 字符串生成为 style 节点
+          'style-loader',
+          // 将 CSS 转化成 CommonJS 模块
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 1,
+              modules: {
+                localIdentName: '[hash:base64]',
+              },
+            },
+          },
+          // 将 Sass 编译成 CSS
+          'sass-loader',
+        ],
       },
     ],
   },
@@ -48,8 +72,8 @@ module.exports = merge(common, {
       },
     },
   },
-  externals:{
-    react:"React",
-    "react-dom":"ReactDOM"
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM"
   }
 });

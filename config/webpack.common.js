@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const { webpack,EnvironmentPlugin } = require('webpack');
 module.exports = {
     entry: {
         app: './src/index.tsx',
@@ -12,6 +13,9 @@ module.exports = {
         }),
         new ForkTsCheckerWebpackPlugin({
             
+        }),
+        new EnvironmentPlugin({
+            "NODE_ENV":"development"
         })
     ],
     output: {
@@ -23,7 +27,6 @@ module.exports = {
 
     module: {
         rules: [
-
             {
                 test: /\.s[ac]ss$/i,
                 use: [
