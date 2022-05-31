@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Link, Routes, BrowserRouter as Router, useNavigate, useLocation } from 'react-router-dom';
 import classnames from 'classnames';
 import Home from './home';
@@ -15,12 +15,12 @@ import articleStore, { ArticleList } from "@/store/article";
 import { observer } from "mobx-react-lite";
 import api from "@/api/api";
 import 'antd/dist/antd.css';
-import Comment from "./comment"
 import ArticleContext from "@/context/article";
 interface loginStateType {
     username: string | null,
     user_id: number | null,
 }
+const Comment = lazy(() => import("./comment"))
 export default observer(({ articleStore }: { articleStore: ArticleList }) => {
     const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
     const [clientWidth, setClientWidth] = useState<number>(1000);
@@ -57,13 +57,13 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                 <ul style={{ marginTop: 0 }}>
                     <li ><Link
                         to='/'
-                        styleName={pathname === "/" ? 'selectedLi' : ''}>home</Link></li>
+                        styleName={pathname === "/" ? 'selectedLi' : ''}>首页</Link></li>
 
                     <li
-                        styleName={pathname.includes("article") ? 'selectedLi' : ''}>article</li>
+                        styleName={pathname.includes("article") ? 'selectedLi' : ''}>文章</li>
                     <li ><Link
                         to='/comment'
-                        styleName={pathname.includes("comment") ? 'selectedLi' : ''}>comment</Link></li>
+                        styleName={pathname.includes("comment") ? 'selectedLi' : ''}>留言</Link></li>
                 </ul>
                 <ThemeButton />
             </div>
@@ -91,7 +91,10 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                     <Routes>
                         <Route path='/' element={<Home />} />
                         {articleList.size > 0 && prodArticleLink()}
-                        <Route path='/comment' element={<Comment />} />
+                        <Route path='/comment' element={
+                            <Suspense fallback={null}>
+                                <Comment />
+                            </Suspense>} />
                     </Routes>
                 </ArticleContext.Provider>
             </div>
