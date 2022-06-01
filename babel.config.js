@@ -9,7 +9,7 @@ module.exports = api => {
       [
         "@dr.pogodin/react-css-modules",
         {
-          "generateScopedName": !isDev ? "[path]_[local]" : "[local]__[hash:base64:5]",
+          "generateScopedName": isDev ? "[path]_[local]" : "[local]__[hash:base64:5]",
           "filetypes": {
             ".scss": { "syntax": "postcss-scss" }
           },

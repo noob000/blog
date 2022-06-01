@@ -7,25 +7,34 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   output: {
+    filename: '[name].bundle.js',
     publicPath: "./"
   },
   plugins: [
     new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
-      attributes: {
-        id: "target",
-        "data-target": "example",
-      },
+      // Options similar to the same options in webpackOptions.output
+      // all options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+      ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
-    new EnvironmentPlugin({
-      "NODE_ENV": "production"
-    })
   ],
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
+              publicPath: "../",
+            },
+          },
+          "css-loader",
+        ],
       },
       {
         test: /\.s[ac]ss$/i,
