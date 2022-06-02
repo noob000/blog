@@ -8,7 +8,7 @@ module.exports = merge(common, {
   devtool: 'source-map',
   output: {
     filename: '[name].bundle.js',
-    publicPath: "./"
+    publicPath: "/"
   },
   plugins: [
     new BundleAnalyzerPlugin(),
