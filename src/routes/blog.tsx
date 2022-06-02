@@ -38,11 +38,6 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
         return articleLink;
     }
     useEffect(() => {
-        api.getArticleList().then((res: any) => {
-            inital(res)
-        })
-    }, [])
-    useEffect(() => {
         setDrawerVisible(clientWidth > 1200 ? false : drawerVisible)
     }, [clientWidth])
 
@@ -90,7 +85,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                 }}>
                     <Routes>
                         <Route path='/' element={<Home />} />
-                        {articleList.size > 0 && prodArticleLink()}
+                        {prodArticleLink()}
                         <Route path='/comment' element={
                             <Suspense fallback={null}>
                                 <Comment />
