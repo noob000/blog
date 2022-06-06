@@ -1,15 +1,15 @@
 import React, { FC } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Divider } from 'antd';
 import { dateIcon, commentIcon, visitIcon, likeIcon, folderIcon } from "../../../icon"
 import api, { ArticleItemProps } from "@/api/api";
 import dayjs from "dayjs";
 import "./style.scss"
-const ArticleItem: FC<ArticleItemProps> = ({ title,time, love, view, catagory, id, article_info, }) => {
+const ArticleItem: FC<ArticleItemProps> = ({ title, time, love, view, catagory, id, article_info, }) => {
     const updateView = () => api.updateView(id)
-
+    const navigate = useNavigate();
     return (
-        <div styleName='articleItem'>
+        <div styleName='articleItem' onTouchStart={()=>{navigate(`/article/${id}`)}}>
             <div styleName="infor_container">
                 <p>{title}</p>
                 <p styleName='article_content'>{article_info}</p>

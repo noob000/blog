@@ -2,7 +2,7 @@
 
 .mainContainer {
     padding-left: 1rem;
-
+    flex-grow: 2;
     &:hover {
         .title {
             .delete {
@@ -49,13 +49,14 @@
     padding: 0.5rem;
     display: flex;
     width: 100%;
+    overflow: hidden;
 
     .contentContainer {
         padding-bottom: 0.5rem;
     }
 
     .replyedContainer {
-        width: 40vw;
+        width: 80%;
         padding-left: 0.5rem;
         background-color: var(--replyed-content);
         overflow: hidden;
@@ -84,5 +85,3 @@
     padding: 2rem 1rem 2rem 1rem;
     margin-bottom: 1rem;
 }
-
-.avatarContainer {}

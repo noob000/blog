@@ -62,22 +62,6 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                 </ul>
                 <ThemeButton />
             </div>
-
-            <div styleName={classnames({
-                toTop: true,
-                toTopDisplay: bottomBarVisible
-            })}
-                onClick={() => {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    })
-                }}>
-                <Tooltip title='move to top'>
-                    <ToTopOutlined />
-                </Tooltip>
-
-            </div>
             <div>
                 <ArticleContext.Provider value={{
                     getArticle: articleStore.getArticle,

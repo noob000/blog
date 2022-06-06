@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Articlelist from '../component/articlelist';
 import './style/home.scss';
-import Lovecard from '../component/lovecard';
 import articleStore from "@/store/article";
 import IntroCard from "../component/intro_card/index"
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
 
                 <Articlelist/>
                 <div styleName='cardContainer'>
-                    <Lovecard />
                     <IntroCard/>
                 </div>
             </div>

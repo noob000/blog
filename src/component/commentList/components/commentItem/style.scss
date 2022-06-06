@@ -30,6 +30,7 @@
 
     .mainContainer {
         padding-left: 1rem;
+        flex-grow: 2;
 
         .title {
             margin-bottom: 0.5rem;
@@ -66,7 +67,8 @@
 }
 
 .replyList {
-    width: 50vw;
+   
+    width: 100%;
     border-radius: 10px;
     background-color: var(--reply-bg);
 
@@ -109,4 +111,12 @@
     padding: 2rem 1rem 2rem 1rem;
     margin-bottom: 1rem;
 }
-.avatarContainer{}
+
+
+
+@media only screen and (min-width:800px) {
+    .replyList {
+        max-width: 50vw;
+    }
+
+}
