@@ -70,6 +70,13 @@
             opacity: .8;
         }
     }
+
+    .buttonContainer {
+        .commentLinkIcon {
+
+            display: none;
+        }
+    }
 }
 
 
@@ -147,9 +154,30 @@
         .toggle_button {
             display: inline;
             cursor: pointer;
+        }
 
+        .buttonContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .commentLinkIcon {
+                svg {
+                    path{
+                        fill: var(--comment-svg-color);
+                    }
+                   
+                }
+
+                position: relative;
+                top: 3px;
+                right: 1rem;
+                display: block;
+                cursor: pointer;
+            }
         }
     }
+
 }
 
 .backButton {

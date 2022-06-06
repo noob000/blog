@@ -43,7 +43,7 @@ const ReplyItem: FC<ReplyItemProps> = ({
     }
     return (
         <div styleName='replyContainer'>
-            <div styleName='avatarContainer'>
+            <div >
                 <Avatar icon={<UserOutlined />} size={30} />
             </div>
             <div styleName='mainContainer'>

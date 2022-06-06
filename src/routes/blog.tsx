@@ -13,8 +13,8 @@ import ThemeButton from '../component/themeButton';
 import { useState, useEffect, useRef } from "react";
 import articleStore, { ArticleList } from "@/store/article";
 import { observer } from "mobx-react-lite";
-import api from "@/api/api";
 import 'antd/dist/antd.css';
+import { commentLinkIcon } from "@/icon";
 import ArticleContext from "@/context/article";
 interface loginStateType {
     username: string | null,
@@ -47,7 +47,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
     return (
         <div styleName="root">
             <div styleName='nav' id='navigation' >
-                <span onClick={() => navigate("/")} styleName="backButton"> <ArrowLeftOutlined /></span>
+                {pathname !== "/" && <span onClick={() => navigate("/")} styleName="backButton"> <ArrowLeftOutlined /></span>}
                 <span styleName='logo' onClick={() => navigate("/")}>no_OBlog</span>
                 <ul style={{ marginTop: 0 }}>
                     <li ><Link
@@ -60,7 +60,10 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                         to='/comment'
                         styleName={pathname.includes("comment") ? 'selectedLi' : ''}>留言</Link></li>
                 </ul>
-                <ThemeButton />
+                <div styleName="buttonContainer">
+                    {pathname !== "/comment" && <div styleName="commentLinkIcon" onClick={() => { navigate("/comment") }}>{commentLinkIcon}</div>}
+                    <ThemeButton />
+                </div>
             </div>
             <div>
                 <ArticleContext.Provider value={{

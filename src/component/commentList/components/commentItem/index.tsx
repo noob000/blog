@@ -33,7 +33,7 @@ const Index: FC<ArticleComment | baseComment> = (props) => {
     return (
         <>
             <div styleName='commentContainer'>
-                <div styleName='avatarContainer'>
+                <div >
                     <Avatar icon={<UserOutlined />} size={30} />
                 </div>
                 <div styleName='mainContainer'>

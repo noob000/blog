@@ -1,7 +1,14 @@
 @import "../../style/basic.scss";
 
 .commentWrapper {
-    width:65vw;
+    width: 65vw;
     margin: 0 auto;
 }
 
+@media only screen and (max-width:1200px) {
+
+    .commentWrapper {
+        width: 95vw;
+        margin: 0 auto;
+    }
+}
