@@ -18,9 +18,17 @@ class ArticleList {
         this.index++;
     }
     inital() {
-        api.getArticleList().then((data:any)=>{
-            for (let i of data) this.articleList.set(i.id, i)
-        })
+        api.listInital()
+            .then((data: any) => {
+                for (let i of data) this.articleList.set(i.id, i)
+                return api.getArticleList()
+            })
+            .then((data: ArticleItemProps[]) => {
+                data.forEach((v) => {
+                    const item = this.articleList.get(v.id);
+                    this.articleList.set(v.id, { ...item, ...v });
+                })
+            })
     }
     getArticle(id: number): ArticleItemProps {
         return this.articleList.get(id)
