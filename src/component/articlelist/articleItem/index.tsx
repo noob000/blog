@@ -9,7 +9,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, time, love, view, catagory, 
     const updateView = () => api.updateView(id)
     const navigate = useNavigate();
     return (
-        <div styleName='articleItem' onTouchStart={()=>{navigate(`/article/${id}`)}}>
+        <div styleName='articleItem' onClick={() => { if (window.innerWidth <= 620) navigate(`/article/${id}`) }}>
             <div styleName="infor_container">
                 <p>{title}</p>
                 <p styleName='article_content'>{article_info}</p>
