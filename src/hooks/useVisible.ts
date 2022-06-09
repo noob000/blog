@@ -6,13 +6,13 @@ const useVisible = (ref: RefObject<HTMLDivElement>) => {
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             const item = entries[0];
-            console.log(item)
             if (item.intersectionRatio > 0) {
                 const isAll = updateList();
-                if (isAll) observer.disconnect();
+                if (isAll) observer.disconnect()
             }
         })
         ref.current && observer.observe(ref.current);
+        return () => { observer.disconnect() }
     }, [ref.current])
 }
 export default useVisible
