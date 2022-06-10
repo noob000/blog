@@ -3,6 +3,8 @@ const common = require('./webpack.common.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { EnvironmentPlugin } = require("webpack")
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
@@ -80,7 +82,13 @@ module.exports = merge(common, {
         },
       },
     },
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin()
+    ],
   },
+
   externals: {
     react: "React",
     "react-dom": "ReactDOM"
