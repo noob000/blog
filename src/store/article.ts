@@ -40,9 +40,10 @@ class ArticleList {
     updateList() {
         if (!this.isAll)
             api.updateList(this.lastId).then(({ list, isAll }: any) => {
-                if (list.length)
+                if (list.length) {
                     for (let i of list) this.articleList.set(i.id, i)
-                this.lastId = list[list.length - 1].id
+                    this.lastId = list[list.length - 1].id
+                }
                 this.isAll = isAll
             })
         return this.isAll
