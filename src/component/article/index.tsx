@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Prism from 'prismjs';
 import './style/style.scss';
-import "./style/highlight.css";
+import "./style/test.css";
 import dayjs from 'dayjs';
 import { articleLikeIcon, articleLikedIcon } from "@/icon"
 import api, { ArticleItemProps } from '@/api/api';
@@ -11,9 +11,12 @@ import useArticle from '@/hooks/useArticle';
 
 const Article_Content: FC<{ id: number }> = ({ id }) => {
     const { article_content, catalogue, time } = useArticle(id) as ArticleItemProps
-    const [love, setLove] = useLove("article", id)
+    const [love, setLove] = useLove("article", id);
+    const [index, setIndex] = useState<number>(1)
     useLayoutEffect(() => {
-        Prism.highlightAll()
+        document.querySelectorAll("pre").forEach(x => x.setAttribute("data-language", "typescript"))
+        Prism.highlightAll();
+        console.log(article_content);
     }, [])
     return (
         <>
@@ -26,7 +29,7 @@ const Article_Content: FC<{ id: number }> = ({ id }) => {
                             <div styleName="article-icon" onClick={setLove}>{love ? articleLikedIcon : articleLikeIcon}</div>
                         </div>
                     </div>
-                    <CommentList id={id} catagory="article"/>
+                    <CommentList id={id} catagory="article" />
                 </div>
                 {
                     catalogue &&
@@ -37,7 +40,6 @@ const Article_Content: FC<{ id: number }> = ({ id }) => {
                                 style={{ paddingLeft: "10px" }}
                                 dangerouslySetInnerHTML={{ __html: catalogue }} />
                         </div>
-
                     </div>
                 }
             </div>

@@ -40,7 +40,13 @@ module.exports = api => {
       ],
       ["@babel/plugin-proposal-decorators", { "legacy": true }],
       ["@babel/plugin-proposal-class-properties", { "loose": false }],
-      ["react-hot-loader/babel"]
+      ["react-hot-loader/babel"],
+      ["prismjs", {
+        "languages": ["javascript", "css", "markup","typescript"],
+        "plugins": ["line-numbers","show-language","normalize-whitespace"],
+        "theme": "tomorrow",
+        "css": true
+    }]
     ],
     "assumptions": {
       "setPublicClassFields": false
