@@ -5,17 +5,15 @@ import Home from './home';
 // import Blog_part from './blog_part';
 import './style/blog.scss';
 import '@/style/basic.scss';
-import { Tooltip } from 'antd';
-import { ToTopOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import {ArrowLeftOutlined } from '@ant-design/icons';
 import Article from '../component/article';
 // import Bottombar from '../component/bottombar';
 import ThemeButton from '../component/themeButton';
-import { useState, useEffect, useRef } from "react";
-import articleStore, { ArticleList } from "@/store/article";
+import { useState, useEffect } from "react";
+import { ArticleList } from "@/store/article";
 import { observer } from "mobx-react-lite";
 import 'antd/dist/antd.css';
 import { commentLinkIcon } from "@/icon";
-import ArticleContext from "@/context/article";
 interface loginStateType {
     username: string | null,
     user_id: number | null,
@@ -66,11 +64,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                 </div>
             </div>
             <div>
-                <ArticleContext.Provider value={{
-                    getArticle: articleStore.getArticle,
-                    getAllArticle: articleStore.getAllArticle,
-                    updateList:articleStore.updateList
-                }}>
+               
                     <Routes>
                         <Route path='/' element={<Home />} />
                         {prodArticleLink()}
@@ -79,7 +73,7 @@ export default observer(({ articleStore }: { articleStore: ArticleList }) => {
                                 <Comment />
                             </Suspense>} />
                     </Routes>
-                </ArticleContext.Provider>
+               
             </div>
             {/* <Bottombar /> */}
 

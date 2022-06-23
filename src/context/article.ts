@@ -1,4 +1,5 @@
 import { ArticleItemProps } from "@/api/api";
+import articleStore from "@/store/article";
 import React, { createContext } from "react"
 interface ArticleContextProps {
     getArticle: ((id: number) => ArticleItemProps) | null,
@@ -7,8 +8,8 @@ interface ArticleContextProps {
 }
 
 const ArticleContext = createContext<ArticleContextProps>({
-    getArticle: null,
-    getAllArticle: null,
-    updateList: null
+    getArticle: articleStore.getArticle,
+    getAllArticle: articleStore.getAllArticle,
+    updateList: articleStore.updateList
 })
 export default ArticleContext
